@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import './App.css'
+import { useState, useEffect } from "react";
+import "./App.css";
 import axios from "axios";
 
 function App() {
@@ -16,19 +16,15 @@ function App() {
 
   return (
     <>
-      <h1 className="text-5xl font-bold underline">
-        Hello World!
-      </h1>
-      {
-        array.map((user, index) => (
-          <div key={index}>
-            <span>{user}</span>
-            <br/>
-          </div>
-        ))
-      }
+      <h1 className="text-5xl font-bold underline">Hello World!</h1>
+      {array.map((user, index) => (
+        <div key={index}>
+          <span>{user}</span>
+          <br />
+        </div>
+      ))}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
