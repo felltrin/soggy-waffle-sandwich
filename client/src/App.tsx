@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 import "./App.css";
 import axios from "axios";
 
@@ -20,7 +20,7 @@ function App() {
       {array.map((user, index) => (
         <div key={index}>
           <span>{user}</span>
-          <br />
+          <br/>
         </div>
       ))}
     </>
