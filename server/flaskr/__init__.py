@@ -26,4 +26,7 @@ def create_app(test_config=None):
     def users():
         return jsonify({"users": ["lucius", "gabe", "jai"]})
 
+    from  . import db
+    db.init_app(app)
+
     return app
