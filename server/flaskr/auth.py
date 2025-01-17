@@ -56,7 +56,7 @@ def login():
 
 
 @bp.route('/get_name', methods=['GET'])
-@jwt_required
+@jwt_required()
 def get_name():
     user_id = get_jwt_identity()
     db = get_db()
