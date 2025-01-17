@@ -11,7 +11,7 @@ CREATE TABLE workout (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
     created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    distance FLOAT NOT NULL, -- where distance is measured in kilometers
-    duration FLOAT NOT NULL,
+    distance FLOAT, -- where distance is measured in kilometers
+    duration FLOAT,
     FOREIGN KEY (user_id) REFERENCES user (id)
 );
