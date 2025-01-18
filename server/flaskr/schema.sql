@@ -15,3 +15,12 @@ CREATE TABLE workout (
     duration FLOAT,
     FOREIGN KEY (user_id) REFERENCES user (id)
 );
+
+CREATE TABLE tokenblocklist (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    jti VARCHAR(36) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX jti_index
+ON tokenblocklist (jti);

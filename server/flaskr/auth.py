@@ -1,8 +1,11 @@
+from datetime import datetime, timezone
+
 from flask import Blueprint, redirect, request, url_for, jsonify
 from flask_jwt_extended import (
     jwt_required,
     create_access_token,
     current_user,
+    get_jwt
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -25,42 +28,52 @@ def user_lookup_callback(_jwt_header, jwt_data):
     return db.execute("SELECT * FROM user WHERE id = ?", (identity,)).fetchone()
 
 
+@jwt.token_in_blocklist_loader
+def check_if_token_revoked(jwt_header, jwt_payload: dict) -> bool:
+    jti = jwt_payload["jti"]
+    db = get_db()
+    token = db.execute(
+        "SELECT * FROM tokenblocklist WHERE jti = ?", (jti,)
+    ).fetchone()
+
+    return token is not None
+
+
 @bp.route("/register", methods=["POST"])
 def register():
-    if request.method == "POST":
-        data = request.get_json()
-        username = data["username"]
-        password = data["password"]
-        print("Received data:", username, password)
-        db = get_db()
+    data = request.get_json()
+    username = data["username"]
+    password = data["password"]
+    print("Received data:", username, password)
+    db = get_db()
 
-        if not username:
-            return (
-                jsonify({"message": "Registration Failed: Username is required."}),
-                401,
-            )
-        elif not password:
-            return (
-                jsonify({"message": "Registration Failed: Password is required."}),
-                401,
-            )
+    if not username:
+        return (
+            jsonify({"message": "Registration Failed: Username is required."}),
+            401,
+        )
+    elif not password:
+        return (
+            jsonify({"message": "Registration Failed: Password is required."}),
+            401,
+        )
 
-        try:
-            db.execute(
-                "INSERT INTO user (username, password) VALUES (?, ?)",
-                (username, generate_password_hash(password)),
-            )
-            db.commit()
-        except db.IntegrityError:
-            return (
-                jsonify({"message": f"Username {username} is already registered."}),
-                401,
-            )
-        else:
-            return redirect(url_for("auth.login"))
+    try:
+        db.execute(
+            "INSERT INTO user (username, password) VALUES (?, ?)",
+            (username, generate_password_hash(password)),
+        )
+        db.commit()
+    except db.IntegrityError:
+        return (
+            jsonify({"message": f"Username {username} is already registered."}),
+            401,
+        )
+    else:
+        return redirect(url_for("auth.login"))
 
 
-@bp.route("/login", methods=["POST"])
+@bp.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         data = request.get_json()
@@ -91,3 +104,26 @@ def get_name():
             "password": current_user["password"],
         }
     )
+
+
+@bp.route("/logout", methods=["DELETE"])
+@jwt_required()
+def modify_token():
+    jti = get_jwt()["jti"]
+    now = datetime.now(timezone.utc)
+    db = get_db()
+
+    try:
+        db.execute(
+            "INSERT INTO tokenblocklist (jti, created_at) VALUES (?, ?)",
+            (jti, now),
+        )
+        db.commit()
+    except db.IntegrityError:
+        return (
+            jsonify({"message": f"JTI {jti} is already blocked."}),
+            401,
+        )
+    else:
+        print("JWT Revoked")
+        return redirect(url_for("auth.login"))
