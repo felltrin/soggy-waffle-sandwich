@@ -1,27 +1,49 @@
-from flask import (
-    Blueprint, redirect, request, url_for, jsonify
+from flask import Blueprint, redirect, request, url_for, jsonify
+from flask_jwt_extended import (
+    jwt_required,
+    create_access_token,
+    current_user,
 )
-from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from flaskr.db import get_db
+from . import jwt
 
-bp = Blueprint('auth', __name__, url_prefix='/auth')
+bp = Blueprint("auth", __name__, url_prefix="/auth")
 
 
-@bp.route('/register', methods=['POST'])
+@jwt.user_identity_loader
+def user_identity_loader(user):
+    return user["id"]
+
+
+@jwt.user_lookup_loader
+def user_lookup_callback(_jwt_header, jwt_data):
+    identity = jwt_data["sub"]
+    db = get_db()
+
+    return db.execute("SELECT * FROM user WHERE id = ?", (identity,)).fetchone()
+
+
+@bp.route("/register", methods=["POST"])
 def register():
-    if request.method == 'POST':
+    if request.method == "POST":
         data = request.get_json()
-        username = data['username']
-        password = data['password']
-        print('Received data:', username, password)
+        username = data["username"]
+        password = data["password"]
+        print("Received data:", username, password)
         db = get_db()
 
         if not username:
-            return jsonify({'message': 'Registration Failed: Username is required.'}), 401
+            return (
+                jsonify({"message": "Registration Failed: Username is required."}),
+                401,
+            )
         elif not password:
-            return jsonify({'message': 'Registration Failed: Password is required.'}), 401
+            return (
+                jsonify({"message": "Registration Failed: Password is required."}),
+                401,
+            )
 
         try:
             db.execute(
@@ -30,41 +52,42 @@ def register():
             )
             db.commit()
         except db.IntegrityError:
-            return jsonify({'message': f"Username {username} is already registered."}), 401
+            return (
+                jsonify({"message": f"Username {username} is already registered."}),
+                401,
+            )
         else:
             return redirect(url_for("auth.login"))
 
 
-@bp.route('/login', methods=['POST'])
+@bp.route("/login", methods=["POST"])
 def login():
-    if request.method == 'POST':
+    if request.method == "POST":
         data = request.get_json()
-        username = data['username']
-        password = data['password']
-        print('Received data:', username, password)
+        username = data["username"]
+        password = data["password"]
+        print("Received data:", username, password)
 
         db = get_db()
         user = db.execute(
-            'SELECT * FROM user WHERE username = ?', (username,)
+            "SELECT * FROM user WHERE username = ?", (username,)
         ).fetchone()
 
-        if user and check_password_hash(user['password'], password):
-            access_token = create_access_token(identity=user['id'])
-            return jsonify({'message': 'Login Success', 'access_token': access_token})
+        if user and check_password_hash(user["password"], password):
+            access_token = create_access_token(identity=user)
+            return jsonify({"message": "Login Success", "access_token": access_token})
         else:
-            return jsonify({'message': 'Login Failed'}), 401
+            return jsonify({"message": "Login Failed"}), 401
 
 
-@bp.route('/get_name', methods=['GET'])
+@bp.route("/get_name", methods=["GET"])
 @jwt_required()
 def get_name():
-    user_id = get_jwt_identity()
-    db = get_db()
-    user = db.execute(
-        'SELECT * FROM user WHERE id = ?', (user_id,)
-    ).fetchone()
-
-    if user:
-        return jsonify({'message': 'User found', 'name': 'User ' + user['username']})
-    else:
-        return jsonify({'message': 'User not found'}), 404
+    return jsonify(
+        {
+            "message": "User found",
+            "name": "User " + current_user["username"],
+            "id": current_user["id"],
+            "password": current_user["password"],
+        }
+    )
