@@ -15,8 +15,9 @@ def index():
     db = get_db()
     workouts = db.execute(
         "SELECT w.id, created, distance, duration, user_id"
-        " FROM workout w JOIN user u ON w.user_id = u.id"
-        " ORDER BY created DESC"
+        " FROM workout w WHERE w.user_id = ?"
+        "  ORDER BY created DESC",
+        (current_user["id"],)
     ).fetchall()
 
     workout_arr = []
