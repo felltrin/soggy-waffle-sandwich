@@ -96,3 +96,13 @@ def update(id):
         )
         db.commit()
         return redirect(url_for("workout.index"))
+
+
+@bp.route("/<int:id>/delete", methods=["POST"])
+@jwt_required()
+def delete(id):
+    get_workout(id)
+    db = get_db()
+    db.execute("DELETE FROM workout WHERE id = ?", (id,))
+    db.commit()
+    return redirect(url_for("workout.index"))
