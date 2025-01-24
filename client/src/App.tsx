@@ -17,9 +17,9 @@ function App() {
       });
   };
 
-  useEffect(() => {
-    fetchAPI();
-  }, []);
+  // useEffect(() => {
+  //   fetchAPI();
+  // }, []);
 
   return (
     <>
