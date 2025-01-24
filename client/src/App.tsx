@@ -17,14 +17,33 @@ function App() {
       });
   };
 
-  // useEffect(() => {
-  //   fetchAPI();
-  // }, []);
+  const fetchProtectedData = async () => {
+    try {
+      const response = await axios.get("http://127.0.0.1:8080/auth/get_name", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log('Protected data:', response.data);
+    } catch (error) {
+      console.error('Failed to fetch protected data:', error.response?.data?.msg || error.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchAPI();
+  }, []);
 
   return (
     <>
-      {/*<h1 className="text-5xl font-bold underline p-4">Hello World!</h1>*/}
-      <Login setToken={setToken} />
+      {!token ? (
+        <Login setToken={setToken} />
+      ) : (
+        <>
+          <p>You are logged in!</p>
+          <button onClick={fetchProtectedData}>Fetch Protected Data</button>
+        </>
+      )}
     </>
   );
 }
