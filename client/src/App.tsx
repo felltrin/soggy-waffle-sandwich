@@ -1,7 +1,9 @@
+import { BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 import {useState, useEffect} from "react";
 import "./App.css";
 import axios from "axios";
-import Login from './Login';
+import Login from './pages/Login';
+import Register from "./pages/Register";
 
 function App() {
   const [array, setArray] = useState([]);
@@ -37,7 +39,17 @@ function App() {
   return (
     <>
       {!token ? (
-        <Login setToken={setToken} />
+        <>
+          <Router>
+            <nav>
+              <Link to="/">Home</Link> | <Link to="/register">Register</Link>
+            </nav>
+            <Routes>
+              <Route path="/" element={<Login setToken={setToken} />} />
+              <Route path="/register" element={<Register />} />
+            </Routes>
+          </Router>
+        </>
       ) : (
         <>
           <p>You are logged in!</p>
