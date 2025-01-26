@@ -34,7 +34,7 @@ function Login({setToken}) {
         <form onSubmit={handleLogin} className="max-w-md mx-auto">
           <div className="mb-4">
             <label className="block mb-2">
-              Email
+              Username
             </label>
             <input type="text"
                    placeholder="Username"
