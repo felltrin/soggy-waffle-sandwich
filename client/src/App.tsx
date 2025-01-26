@@ -1,23 +1,12 @@
+import {useState} from "react";
 import { BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
-import {useState, useEffect} from "react";
 import "./App.css";
 import axios from "axios";
 import Login from './pages/Login';
 import Register from "./pages/Register";
 
 function App() {
-  const [array, setArray] = useState([]);
   const [token, setToken] = useState(null);
-
-  const fetchAPI = async () => {
-    axios.get("http://127.0.0.1:8080/api/users")
-      .then(response => {
-        setArray(response.data.users);
-      })
-      .catch(error => {
-        console.error("Error fetching data:", error);
-      });
-  };
 
   const fetchProtectedData = async () => {
     try {
@@ -31,10 +20,6 @@ function App() {
       console.error('Failed to fetch protected data:', error.response?.data?.msg || error.message);
     }
   };
-
-  useEffect(() => {
-    fetchAPI();
-  }, []);
 
   return (
     <>
