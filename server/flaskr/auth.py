@@ -42,8 +42,8 @@ def check_if_token_revoked(jwt_header, jwt_payload: dict) -> bool:
 @bp.route("/register", methods=["POST"])
 def register():
     data = request.get_json()
-    username = data["username"]
-    password = data["password"]
+    username = data["formData"]["username"]
+    password = data["formData"]["password"]
     print("Received data:", username, password)
     db = get_db()
 
@@ -70,7 +70,7 @@ def register():
             401,
         )
     else:
-        return redirect(url_for("auth.login"))
+        return jsonify({"message": "Registration Successful"}), 200
 
 
 @bp.route("/login", methods=["GET", "POST"])
