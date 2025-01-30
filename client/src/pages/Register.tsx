@@ -45,6 +45,12 @@ function Register() {
     return errors;
   };
 
+  /**
+   * Registration logic when the user presses the register button.
+   * Sends the request to the server
+   *
+   * @param e event param
+   */
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
 
