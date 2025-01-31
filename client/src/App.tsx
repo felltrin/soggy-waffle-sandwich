@@ -17,6 +17,8 @@ function App() {
       });
       console.log('Protected data:', response.data);
     } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       console.error('Failed to fetch protected data:', error.response?.data?.msg || error.message);
     }
   };
