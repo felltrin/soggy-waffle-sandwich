@@ -4,6 +4,7 @@ import "./App.css";
 import axios from "axios";
 import Login from './pages/Login';
 import Register from "./pages/Register";
+import WorkoutForm from "./components/WorkoutForm.tsx";
 
 function App() {
   const [token, setToken] = useState(null);
@@ -41,6 +42,7 @@ function App() {
         <>
           <p>You are logged in!</p>
           <button onClick={fetchProtectedData}>Fetch Protected Data</button>
+          <WorkoutForm />
         </>
       )}
     </>
