@@ -33,7 +33,7 @@ function App() {
             </nav>
             <Routes>
               <Route path="/" element={<Login setToken={setToken} />} />
-              <Route path="/register" element={<Register />} />
+              <Route path="/register" element={<Register setToken={setToken} />} />
             </Routes>
           </Router>
         </>

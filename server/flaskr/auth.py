@@ -1,12 +1,7 @@
 from datetime import datetime, timezone
 
 from flask import Blueprint, redirect, request, url_for, jsonify
-from flask_jwt_extended import (
-    jwt_required,
-    create_access_token,
-    current_user,
-    get_jwt
-)
+from flask_jwt_extended import jwt_required, create_access_token, current_user, get_jwt
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from flaskr.db import get_db
@@ -32,9 +27,7 @@ def user_lookup_callback(_jwt_header, jwt_data):
 def check_if_token_revoked(jwt_header, jwt_payload: dict) -> bool:
     jti = jwt_payload["jti"]
     db = get_db()
-    token = db.execute(
-        "SELECT * FROM tokenblocklist WHERE jti = ?", (jti,)
-    ).fetchone()
+    token = db.execute("SELECT * FROM tokenblocklist WHERE jti = ?", (jti,)).fetchone()
 
     return token is not None
 
@@ -70,7 +63,16 @@ def register():
             401,
         )
     else:
-        return jsonify({"message": "Registration Successful"}), 200
+        user = db.execute(
+            "SELECT * FROM user WHERE username = ?", (username,)
+        ).fetchone()
+        access_token = create_access_token(identity=user)
+        return (
+            jsonify(
+                {"message": "Registration Successful", "access_token": access_token}
+            ),
+            200,
+        )
 
 
 @bp.route("/login", methods=["GET", "POST"])
