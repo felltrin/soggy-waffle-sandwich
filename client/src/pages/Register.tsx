@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 
-function Register() {
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
+function Register({setToken}) {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -97,6 +99,8 @@ function Register() {
       });
 
       // const data = response.data;
+      const {access_token} = response.data;
+      setToken(access_token);
       alert(response.data.message);
     } catch (error) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
