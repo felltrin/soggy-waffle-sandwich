@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import axios from 'axios';
 
 function WorkoutForm() {
   const [formData, setFormData] = useState({
@@ -8,6 +9,7 @@ function WorkoutForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("hello world!");
   };
 
   return (
