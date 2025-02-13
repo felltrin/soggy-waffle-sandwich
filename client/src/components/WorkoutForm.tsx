@@ -30,7 +30,7 @@ function WorkoutForm() {
 
           <div className="mb-4">
             <label>Duration</label>
-            <input type="number" step="0.25" placeholder="Duration"
+            <input type="number" step="1" placeholder="Duration"
                    value={formData.duration} onChange={(e) => {
                      setFormData({...formData, duration: e.target.value});
                    }}/>
