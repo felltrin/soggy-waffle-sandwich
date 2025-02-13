@@ -4,6 +4,17 @@ import {BrowserRouter as Router, Link, Route, Routes} from "react-router-dom";
 import Login from "../pages/Login.tsx";
 import Register from "../pages/Register.tsx";
 import WorkoutForm from "./WorkoutForm.tsx";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+  navigationMenuTriggerStyle
+} from "@/components/ui/navigation-menu"
 
 
 function Experience() {
@@ -25,27 +36,42 @@ function Experience() {
   };
 
   return (
-    <>
-      {!token ? (
-        <>
-          <Router>
-            <nav>
-              <Link to="/">Home</Link> | <Link to="/register">Register</Link>
-            </nav>
-            <Routes>
-              <Route path="/" element={<Login setToken={setToken}/>}/>
-              <Route path="/register" element={<Register setToken={setToken}/>}/>
-            </Routes>
-          </Router>
-        </>
-      ) : (
-        <>
-          <p>You are logged in!</p>
-          <button onClick={fetchProtectedData}>Fetch Protected Data</button>
-          <WorkoutForm/>
-        </>
-      )}
-    </>);
+      <>
+        {!token ? (
+            <>
+              <Router>
+                <NavigationMenu>
+                  <NavigationMenuList>
+                    <NavigationMenuItem>
+                      <Link to="/">
+                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                          Home
+                        </NavigationMenuLink>
+                      </Link>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
+                      <Link to="/register">
+                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                          Register
+                        </NavigationMenuLink>
+                      </Link>
+                    </NavigationMenuItem>
+                  </NavigationMenuList>
+                </NavigationMenu>
+                <Routes>
+                  <Route path="/" element={<Login setToken={setToken}/>}/>
+                  <Route path="/register" element={<Register setToken={setToken}/>}/>
+                </Routes>
+              </Router>
+            </>
+        ) : (
+            <>
+              <p>You are logged in!</p>
+              <button onClick={fetchProtectedData}>Fetch Protected Data</button>
+              <WorkoutForm/>
+            </>
+        )}
+      </>);
 }
 
 export default Experience;
