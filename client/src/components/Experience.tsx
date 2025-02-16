@@ -1,77 +1,59 @@
 import React, {useState} from "react";
-import axios from "axios";
 import {BrowserRouter as Router, Link, Route, Routes} from "react-router-dom";
 import Login from "../pages/Login.tsx";
 import Register from "../pages/Register.tsx";
-import WorkoutForm from "./WorkoutForm.tsx";
 import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuIndicator,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuViewport,
   navigationMenuTriggerStyle
 } from "@/components/ui/navigation-menu"
+import Dashboard from "@/pages/Dashboard.tsx";
 
 
 function Experience() {
   const [token, setToken] = useState(null);
 
-  const fetchProtectedData = async () => {
-    try {
-      const response = await axios.get("http://127.0.0.1:8080/auth/get_name", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      console.log('Protected data:', response.data);
-    } catch (error) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
-      console.error('Failed to fetch protected data:', error.response?.data?.msg || error.message);
-    }
-  };
-
   return (
-      <>
-        {!token ? (
-            <>
-              <Router>
-                <NavigationMenu>
-                  <NavigationMenuList>
-                    <NavigationMenuItem>
-                      <Link to="/">
-                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                          Home
-                        </NavigationMenuLink>
-                      </Link>
-                    </NavigationMenuItem>
-                    <NavigationMenuItem>
-                      <Link to="/register">
-                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                          Register
-                        </NavigationMenuLink>
-                      </Link>
-                    </NavigationMenuItem>
-                  </NavigationMenuList>
-                </NavigationMenu>
-                <Routes>
-                  <Route path="/" element={<Login setToken={setToken}/>}/>
-                  <Route path="/register" element={<Register setToken={setToken}/>}/>
-                </Routes>
-              </Router>
-            </>
-        ) : (
-            <>
-              <p>You are logged in!</p>
-              <button onClick={fetchProtectedData}>Fetch Protected Data</button>
-              <WorkoutForm/>
-            </>
-        )}
-      </>);
+    <>
+      {!token ? (
+        <>
+          <Router>
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <Link to="/">
+                    <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                      Home
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <Link to="/register">
+                    <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                      Register
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+            <Routes>
+              <Route path="/" element={<Login setToken={setToken}/>}/>
+              <Route path="/register" element={<Register setToken={setToken}/>}/>
+            </Routes>
+          </Router>
+        </>
+      ) : (
+        <>
+          <Dashboard token={token} />
+        </>
+      )}
+    </>);
 }
 
 export default Experience;
