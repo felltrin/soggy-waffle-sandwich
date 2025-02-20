@@ -36,8 +36,8 @@ def index():
 def create():
     if request.method == "POST":
         data = request.get_json()
-        duration = data["duration"]
-        distance = data["distance"]
+        duration = data["formData"]["duration"]
+        distance = data["formData"]["distance"]
 
         if not duration:
             return jsonify({"message": "Duration is required."})
@@ -48,7 +48,8 @@ def create():
                 (duration, distance, current_user["id"]),
             )
             db.commit()
-            return redirect(url_for("workout.index"))
+            # return redirect(url_for("workout.index"))
+            return jsonify({"message": "Workout Added", "data": f"{duration}, {distance}"})
 
 
 def get_workout(id, check_author=True):

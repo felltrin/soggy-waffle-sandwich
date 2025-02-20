@@ -10,21 +10,24 @@ const Dashboard = ({ token }) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log('Protected data:', response.data);
+      console.log("Protected data:", response.data);
     } catch (error) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
-      console.error('Failed to fetch protected data:', error.response?.data?.msg || error.message);
+      console.error(
+        "Failed to fetch protected data:",
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        error.response?.data?.msg || error.message
+      );
     }
   };
 
   return (
     <>
-      <WorkoutForm/>
+      {/*<p>You are logged in!</p>*/}
+      {/*<button onClick={fetchProtectedData}>Fetch Protected Data</button>*/}
+      <WorkoutForm token={token} />
     </>
   );
 };
-
-
 
 export default Dashboard;
