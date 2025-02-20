@@ -81,7 +81,7 @@ def login():
         data = request.get_json()
         username = data["username"]
         password = data["password"]
-        print("Received data:", username, password)
+        # print("Received data:", username, password)
 
         db = get_db()
         user = db.execute(
