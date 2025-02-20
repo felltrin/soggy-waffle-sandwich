@@ -1,20 +1,17 @@
-import React, {useState} from "react";
-import {BrowserRouter as Router, Link, Route, Routes} from "react-router-dom";
+import React, { useState } from "react";
+import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 import Login from "../pages/Login.tsx";
 import Register from "../pages/Register.tsx";
 import {
   NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuIndicator,
-  NavigationMenuTrigger,
-  NavigationMenuViewport,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  navigationMenuTriggerStyle
-} from "@/components/ui/navigation-menu"
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
 import Dashboard from "@/pages/Dashboard.tsx";
-
+import { SidebarProvider, SidebarTrigger } from "./ui/sidebar.tsx";
+import { AppSidebar } from "./app-sidebar.tsx";
 
 function Experience() {
   const [token, setToken] = useState(null);
@@ -28,14 +25,18 @@ function Experience() {
               <NavigationMenuList>
                 <NavigationMenuItem>
                   <Link to="/">
-                    <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    <NavigationMenuLink
+                      className={navigationMenuTriggerStyle()}
+                    >
                       Home
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                   <Link to="/register">
-                    <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    <NavigationMenuLink
+                      className={navigationMenuTriggerStyle()}
+                    >
                       Register
                     </NavigationMenuLink>
                   </Link>
@@ -43,17 +44,27 @@ function Experience() {
               </NavigationMenuList>
             </NavigationMenu>
             <Routes>
-              <Route path="/" element={<Login setToken={setToken}/>}/>
-              <Route path="/register" element={<Register setToken={setToken}/>}/>
+              <Route path="/" element={<Login setToken={setToken} />} />
+              <Route
+                path="/register"
+                element={<Register setToken={setToken} />}
+              />
             </Routes>
           </Router>
         </>
       ) : (
         <>
-          <Dashboard token={token} />
+          <SidebarProvider>
+            <AppSidebar />
+            <main>
+              <SidebarTrigger />
+              <Dashboard token={token} />
+            </main>
+          </SidebarProvider>
         </>
       )}
-    </>);
+    </>
+  );
 }
 
 export default Experience;
