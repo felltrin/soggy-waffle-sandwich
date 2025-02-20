@@ -20,8 +20,8 @@ const Dashboard = ({ token }) => {
 
   return (
     <>
-      <p>You are logged in!</p>
-      <button onClick={fetchProtectedData}>Fetch Protected Data</button>
+      {/*<p>You are logged in!</p>*/}
+      {/*<button onClick={fetchProtectedData}>Fetch Protected Data</button>*/}
       <WorkoutForm/>
     </>
   );

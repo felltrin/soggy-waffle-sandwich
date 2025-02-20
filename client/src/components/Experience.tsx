@@ -14,6 +14,8 @@ import {
   navigationMenuTriggerStyle
 } from "@/components/ui/navigation-menu"
 import Dashboard from "@/pages/Dashboard.tsx";
+import {SidebarProvider, SidebarTrigger} from "@/components/ui/sidebar.tsx";
+import {AppSidebar} from "@/components/app-sidebar.tsx";
 
 
 function Experience() {
@@ -50,7 +52,14 @@ function Experience() {
         </>
       ) : (
         <>
-          <Dashboard token={token} />
+          <SidebarProvider>
+            <AppSidebar />
+            <main className="flex h-screen flex-col">
+              <SidebarTrigger />
+              <Dashboard token={token} />
+            </main>
+          </SidebarProvider>
+          {/*<Dashboard token={token} />*/}
         </>
       )}
     </>);
