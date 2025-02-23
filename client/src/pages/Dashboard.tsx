@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import WorkoutForm from "@/components/WorkoutForm.tsx";
 import axios from "axios";
 
 const Dashboard = ({ token }) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
   const fetchProtectedData = async () => {
     try {
       const response = await axios.get("http://127.0.0.1:8080/auth/get_name", {
@@ -23,9 +26,15 @@ const Dashboard = ({ token }) => {
 
   return (
     <>
-      {/*<p>You are logged in!</p>*/}
-      {/*<button onClick={fetchProtectedData}>Fetch Protected Data</button>*/}
-      <WorkoutForm token={token} />
+      {/* <p>You are logged in!</p> */}
+      {/* <span>Welcome!</span> */}
+      <button
+        onClick={fetchProtectedData}
+        className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+      >
+        Fetch Protected Data
+      </button>
+      {/* <WorkoutForm token={token} /> */}
     </>
   );
 };
