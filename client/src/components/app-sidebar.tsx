@@ -59,7 +59,7 @@ export function AppSidebar() {
             <SidebarMenuButton asChild>
               <a href={"/auth/logout"}>
                 <LogOut />
-                <span>{"Logout"}</span>
+                <span>{"Sign out"}</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
