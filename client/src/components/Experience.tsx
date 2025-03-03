@@ -12,6 +12,7 @@ import {
 import Dashboard from "@/pages/Dashboard.tsx";
 import { SidebarProvider, SidebarTrigger } from "./ui/sidebar.tsx";
 import { AppSidebar } from "./app-sidebar.tsx";
+import WorkoutForm from "./WorkoutForm.tsx";
 
 function Experience() {
   const [token, setToken] = useState(null);
@@ -58,7 +59,20 @@ function Experience() {
             <AppSidebar />
             <main>
               <SidebarTrigger />
-              <Dashboard token={token} />
+              <Router>
+                <Link to="/workout-logging">
+                  <button className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
+                    Add workout
+                  </button>
+                </Link>
+                <Routes>
+                  <Route
+                    path="/workout-logging"
+                    element={<WorkoutForm token={token} />}
+                  />
+                </Routes>
+              </Router>
+              {/* <Dashboard token={token} /> */}
             </main>
           </SidebarProvider>
         </>
