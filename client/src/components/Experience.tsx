@@ -60,9 +60,9 @@ function Experience() {
             <main>
               <SidebarTrigger /> */}
           <Dashboard token={token} />
-          <Router>
+          {/* <Router>
             <Link to="/workout-logging">
-              <button className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
+              <button className="w-32 bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
                 Add workout
               </button>
             </Link>
@@ -72,7 +72,7 @@ function Experience() {
                 element={<WorkoutForm token={token} />}
               />
             </Routes>
-          </Router>
+          </Router> */}
           {/* </main>
           </SidebarProvider> */}
         </>
