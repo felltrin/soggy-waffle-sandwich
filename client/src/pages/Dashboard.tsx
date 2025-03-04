@@ -27,12 +27,11 @@ const Dashboard = ({ token }) => {
   return (
     <>
       {/* <p>You are logged in!</p> */}
-      {/* <span>Welcome!</span> */}
-      <button
-        onClick={fetchProtectedData}
-        className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
-      >
-        Fetch Protected Data
+      <div>
+        <span>Welcome user!</span>
+      </div>
+      <button className="w-32 bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
+        Add workout
       </button>
       {/* <WorkoutForm token={token} /> */}
     </>
