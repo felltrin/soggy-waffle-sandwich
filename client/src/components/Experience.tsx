@@ -55,26 +55,26 @@ function Experience() {
         </>
       ) : (
         <>
-          <SidebarProvider>
+          {/* <SidebarProvider>
             <AppSidebar />
             <main>
-              <SidebarTrigger />
-              <Router>
-                <Link to="/workout-logging">
-                  <button className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
-                    Add workout
-                  </button>
-                </Link>
-                <Routes>
-                  <Route
-                    path="/workout-logging"
-                    element={<WorkoutForm token={token} />}
-                  />
-                </Routes>
-              </Router>
-              {/* <Dashboard token={token} /> */}
-            </main>
-          </SidebarProvider>
+              <SidebarTrigger /> */}
+          <Dashboard token={token} />
+          <Router>
+            <Link to="/workout-logging">
+              <button className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
+                Add workout
+              </button>
+            </Link>
+            <Routes>
+              <Route
+                path="/workout-logging"
+                element={<WorkoutForm token={token} />}
+              />
+            </Routes>
+          </Router>
+          {/* </main>
+          </SidebarProvider> */}
         </>
       )}
     </>
