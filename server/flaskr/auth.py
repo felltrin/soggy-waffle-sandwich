@@ -98,6 +98,7 @@ def login():
 @bp.route("/get_name", methods=["GET"])
 @jwt_required()
 def get_name():
+    print(current_user)
     return jsonify(
         {
             "message": "User found",
