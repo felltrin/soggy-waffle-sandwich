@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import WorkoutForm from "@/components/WorkoutForm.tsx";
 import axios from "axios";
 
 const Dashboard = ({ token }) => {
   const [username, setUsername] = useState("");
-  // const [password, setPassword] = useState("");
+  const [workouts, setWorkouts] = useState([]);
 
-  const fetchUserData = async () => {
+  const fetchUsername = async () => {
     try {
       const response = await axios.get("http://127.0.0.1:8080/auth/get_name", {
         headers: {
@@ -16,7 +16,7 @@ const Dashboard = ({ token }) => {
       setUsername(response.data.username);
     } catch (error) {
       console.error(
-        "Failed to fetch protected data:",
+        "Failed to fetch username:",
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-expect-error
         error.response?.data?.msg || error.message
@@ -24,7 +24,28 @@ const Dashboard = ({ token }) => {
     }
   };
 
-  fetchUserData();
+  const fetchUserWorkouts = async () => {
+    try {
+      const response = await axios.get("http://127.0.0.1:8080/", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setWorkouts(response.data.workouts);
+    } catch (error) {
+      console.error(
+        "Failed to retrieve workouts:",
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        error.response?.data?.msg || error.message
+      );
+    }
+  };
+
+  useEffect(() => {
+    fetchUsername();
+    fetchUserWorkouts();
+  }, []);
 
   return (
     <>
@@ -34,7 +55,14 @@ const Dashboard = ({ token }) => {
       <button className="w-32 bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
         Add workout
       </button>
-      {/* <button onClick={fetchProtectedData}>Fetch protected data</button> */}
+      {workouts.map((workout, index) => (
+        <div key={index}>
+          <span>{workout.created} </span>
+          <span>{workout.distance}km </span>
+          <span>{workout.duration} minute(s)</span>
+          <br></br>
+        </div>
+      ))}
       {/* <WorkoutForm token={token} /> */}
     </>
   );
