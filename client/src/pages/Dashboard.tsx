@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import WorkoutForm from "@/components/WorkoutForm.tsx";
+// import WorkoutForm from "@/components/WorkoutForm.tsx";
 import axios from "axios";
 
 const Dashboard = ({ token }) => {
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  // const [password, setPassword] = useState("");
 
-  const fetchProtectedData = async () => {
+  const fetchUserData = async () => {
     try {
       const response = await axios.get("http://127.0.0.1:8080/auth/get_name", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log("Protected data:", response.data);
+      setUsername(response.data.username);
     } catch (error) {
       console.error(
         "Failed to fetch protected data:",
@@ -24,15 +24,17 @@ const Dashboard = ({ token }) => {
     }
   };
 
+  fetchUserData();
+
   return (
     <>
-      {/* <p>You are logged in!</p> */}
       <div>
-        <span>Welcome user!</span>
+        <span>Welcome {username}!</span>
       </div>
       <button className="w-32 bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
         Add workout
       </button>
+      {/* <button onClick={fetchProtectedData}>Fetch protected data</button> */}
       {/* <WorkoutForm token={token} /> */}
     </>
   );

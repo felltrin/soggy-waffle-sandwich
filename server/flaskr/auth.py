@@ -101,7 +101,7 @@ def get_name():
     return jsonify(
         {
             "message": "User found",
-            "name": "User " + current_user["username"],
+            "username": current_user["username"],
             "id": current_user["id"],
             "password": current_user["password"],
         }
