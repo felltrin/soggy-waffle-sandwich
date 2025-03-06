@@ -21,37 +21,33 @@ function Experience() {
     <>
       {!token ? (
         <>
-          <Router>
-            <NavigationMenu>
-              <NavigationMenuList>
-                <NavigationMenuItem>
-                  <Link to="/">
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
-                    >
-                      Home
-                    </NavigationMenuLink>
-                  </Link>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <Link to="/register">
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
-                    >
-                      Register
-                    </NavigationMenuLink>
-                  </Link>
-                </NavigationMenuItem>
-              </NavigationMenuList>
-            </NavigationMenu>
-            <Routes>
-              <Route path="/" element={<Login setToken={setToken} />} />
-              <Route
-                path="/register"
-                element={<Register setToken={setToken} />}
-              />
-            </Routes>
-          </Router>
+          {/* <Router> */}
+          <NavigationMenu>
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <Link to="/">
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    Home
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <Link to="/register">
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    Register
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+          <Routes>
+            <Route path="/" element={<Login setToken={setToken} />} />
+            <Route
+              path="/register"
+              element={<Register setToken={setToken} />}
+            />
+          </Routes>
+          {/* </Router> */}
         </>
       ) : (
         <>
