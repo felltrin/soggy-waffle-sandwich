@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Plus } from "lucide-react";
 // import WorkoutForm from "@/components/WorkoutForm.tsx";
 import axios from "axios";
 
@@ -42,6 +43,10 @@ const Dashboard = ({ token }) => {
     }
   };
 
+  const buttonClick = () => {
+    console.log("You clicked the button!");
+  };
+
   useEffect(() => {
     fetchUsername();
     fetchUserWorkouts();
@@ -52,7 +57,12 @@ const Dashboard = ({ token }) => {
       <div>
         <span>Welcome {username}!</span>
       </div>
-      <button className="w-32 bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
+      {/* <button className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"> */}
+      <button
+        className="px-8 py-1 bg-blue-500 text-white rounded-md flex items-center gap-2"
+        onClick={buttonClick}
+      >
+        <Plus className="w-5 h-5" />
         Add workout
       </button>
       {workouts.map((workout, index) => (
