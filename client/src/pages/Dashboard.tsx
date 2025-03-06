@@ -2,6 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Plus } from "lucide-react";
 // import WorkoutForm from "@/components/WorkoutForm.tsx";
 import axios from "axios";
+import WorkoutForm from "@/components/WorkoutForm";
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 
 const Dashboard = ({ token }) => {
   const [username, setUsername] = useState("");
@@ -43,8 +51,13 @@ const Dashboard = ({ token }) => {
     }
   };
 
+  const location = useLocation();
+  const pathname = location.pathname;
+  const condition = pathname === "/";
+
   const buttonClick = () => {
     console.log("You clicked the button!");
+    console.log(location.pathname);
   };
 
   useEffect(() => {
@@ -54,26 +67,36 @@ const Dashboard = ({ token }) => {
 
   return (
     <>
-      <div>
-        <span>Welcome {username}!</span>
-      </div>
-      {/* <button className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"> */}
-      <button
-        className="px-8 py-1 bg-blue-500 text-white rounded-md flex items-center gap-2"
-        onClick={buttonClick}
-      >
-        <Plus className="w-5 h-5" />
-        Add workout
-      </button>
-      {workouts.map((workout, index) => (
-        <div key={index}>
-          <span>{workout.created} </span>
-          <span>{workout.distance}km </span>
-          <span>{workout.duration} minute(s)</span>
-          <br></br>
-        </div>
-      ))}
-      {/* <WorkoutForm token={token} /> */}
+      {condition ? (
+        <>
+          <div>
+            <span>Welcome {username}!</span>
+          </div>
+          {/* <button className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"> */}
+          <Link to="/workout-log">
+            <button
+              className="px-8 py-1 bg-blue-500 text-white rounded-md flex items-center gap-2"
+              onClick={buttonClick}
+            >
+              <Plus className="w-5 h-5" />
+              Add workout
+            </button>
+          </Link>
+          {workouts.map((workout, index) => (
+            <div key={index}>
+              <span>{workout.created} </span>
+              <span>{workout.distance}km </span>
+              <span>{workout.duration} minute(s)</span>
+              <br></br>
+            </div>
+          ))}
+        </>
+      ) : (
+        <></>
+      )}
+      <Routes>
+        <Route path="/workout-log" element={<WorkoutForm token={token} />} />
+      </Routes>
     </>
   );
 };

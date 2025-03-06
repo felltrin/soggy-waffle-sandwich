@@ -1,8 +1,11 @@
+import { BrowserRouter as Router } from "react-router-dom";
 import Experience from "./components/Experience.tsx";
 
 function App() {
   return (
-    <Experience />
+    <Router>
+      <Experience />
+    </Router>
   );
 }
 
