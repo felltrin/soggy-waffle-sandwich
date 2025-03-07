@@ -3,13 +3,7 @@ import { Plus } from "lucide-react";
 // import WorkoutForm from "@/components/WorkoutForm.tsx";
 import axios from "axios";
 import WorkoutForm from "@/components/WorkoutForm";
-import {
-  BrowserRouter as Router,
-  Link,
-  Route,
-  Routes,
-  useLocation,
-} from "react-router-dom";
+import { Link, Route, Routes, useLocation } from "react-router-dom";
 
 const Dashboard = ({ token }) => {
   const [username, setUsername] = useState("");

@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function WorkoutForm({ token }) {
   const [formData, setFormData] = useState({
     distance: 0.0,
     duration: 0.0,
   });
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,6 +33,8 @@ function WorkoutForm({ token }) {
         error.response?.data?.msg || error.message
       );
     }
+
+    navigate("/");
   };
 
   return (
@@ -45,7 +49,7 @@ function WorkoutForm({ token }) {
               placeholder="Distance"
               value={formData.distance}
               onChange={(e) => {
-                setFormData({ ...formData, distance: e.target.value });
+                setFormData({ ...formData, distance: +e.target.value });
               }}
             />
             <label>km</label>
@@ -59,18 +63,20 @@ function WorkoutForm({ token }) {
               placeholder="Duration"
               value={formData.duration}
               onChange={(e) => {
-                setFormData({ ...formData, duration: e.target.value });
+                setFormData({ ...formData, duration: +e.target.value });
               }}
             />
             <label>minutes</label>
           </div>
 
+          {/* <Link to="*"> */}
           <button
             type="submit"
             className="w-3/4 bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
           >
             Submit
           </button>
+          {/* </Link> */}
         </form>
       </div>
     </div>

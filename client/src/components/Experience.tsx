@@ -21,7 +21,6 @@ function Experience() {
     <>
       {!token ? (
         <>
-          {/* <Router> */}
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
@@ -47,7 +46,6 @@ function Experience() {
               element={<Register setToken={setToken} />}
             />
           </Routes>
-          {/* </Router> */}
         </>
       ) : (
         <>
@@ -55,7 +53,7 @@ function Experience() {
             <AppSidebar />
             <main>
               <SidebarTrigger /> */}
-          <Dashboard token={token} />
+          {/* <Dashboard token={token} /> */}
           {/* <Router>
             <Link to="/workout-logging">
               <button className="w-32 bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
@@ -71,6 +69,9 @@ function Experience() {
           </Router> */}
           {/* </main>
           </SidebarProvider> */}
+          <Routes>
+            <Route path="*" element={<Dashboard token={token} />} />
+          </Routes>
         </>
       )}
     </>
