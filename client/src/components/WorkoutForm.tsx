@@ -35,6 +35,7 @@ function WorkoutForm({ token }) {
     }
 
     navigate("/");
+    navigate(0);
   };
 
   return (

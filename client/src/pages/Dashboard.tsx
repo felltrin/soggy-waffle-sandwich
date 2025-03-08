@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Plus } from "lucide-react";
+import { Plus, DeleteIcon } from "lucide-react";
 // import WorkoutForm from "@/components/WorkoutForm.tsx";
 import axios from "axios";
 import WorkoutForm from "@/components/WorkoutForm";
