@@ -81,6 +81,9 @@ const Dashboard = ({ token }) => {
               <span>{workout.created} </span>
               <span>{workout.distance}km </span>
               <span>{workout.duration} minute(s)</span>
+              <span>
+                <DeleteIcon className="w-5 h-5" />
+              </span>
               <br></br>
             </div>
           ))}
