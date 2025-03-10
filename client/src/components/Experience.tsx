@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import Login from "../pages/Login.tsx";
 import Register from "../pages/Register.tsx";
@@ -15,7 +15,11 @@ import { AppSidebar } from "./app-sidebar.tsx";
 import WorkoutForm from "./WorkoutForm.tsx";
 
 function Experience() {
-  const [token, setToken] = useState(null);
+  let token = null;
+
+  if (localStorage.getItem("token")) {
+    token = localStorage.getItem("token");
+  }
 
   return (
     <>
@@ -40,11 +44,8 @@ function Experience() {
             </NavigationMenuList>
           </NavigationMenu>
           <Routes>
-            <Route path="/" element={<Login setToken={setToken} />} />
-            <Route
-              path="/register"
-              element={<Register setToken={setToken} />}
-            />
+            <Route path="/" element={<Login />} />
+            <Route path="/register" element={<Register />} />
           </Routes>
         </>
       ) : (
@@ -70,7 +71,7 @@ function Experience() {
           {/* </main>
           </SidebarProvider> */}
           <Routes>
-            <Route path="*" element={<Dashboard token={token} />} />
+            <Route path="*" element={<Dashboard />} />
           </Routes>
         </>
       )}

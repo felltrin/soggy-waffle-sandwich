@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Plus, DeleteIcon, SquarePen } from "lucide-react";
-// import WorkoutForm from "@/components/WorkoutForm.tsx";
+import { Plus, SquarePen, Trash2 } from "lucide-react";
 import axios from "axios";
 import WorkoutForm from "@/components/WorkoutForm";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
 
-const Dashboard = ({ token }) => {
+const Dashboard = () => {
   const [username, setUsername] = useState("");
   const [workouts, setWorkouts] = useState([]);
+  const token = localStorage.getItem("token");
 
   const fetchUsername = async () => {
     try {
@@ -69,7 +69,7 @@ const Dashboard = ({ token }) => {
           {/* <button className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"> */}
           <Link to="/workout-log">
             <button
-              className="px-8 py-1 bg-blue-500 text-white rounded-md flex items-center gap-2"
+              className="px-8 py-1 bg-blue-500 text-white rounded-md flex items-center gap-2 hover:bg-blue-600"
               onClick={buttonClick}
             >
               <Plus className="w-5 h-5" />
@@ -83,7 +83,7 @@ const Dashboard = ({ token }) => {
               <span>{workout.duration} minute(s)</span>
               <span>
                 <SquarePen className="w-5 h-5" />
-                <DeleteIcon className="w-5 h-5" />
+                <Trash2 className="w-5 h-5" />
               </span>
               <br></br>
             </div>
