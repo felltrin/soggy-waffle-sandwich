@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-function Login({ setToken }) {
+function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -17,13 +15,13 @@ function Login({ setToken }) {
       });
 
       const { access_token } = response.data;
-      setToken(access_token);
+      localStorage.setItem("token", access_token);
       alert(response.data.message);
     } catch (error) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
       console.error(
         "Login failed:",
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         error.response?.data?.msg || error.message
       );
       alert("Login failed. Please check your credentials.");
