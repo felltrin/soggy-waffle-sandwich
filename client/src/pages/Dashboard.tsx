@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Plus, DeleteIcon } from "lucide-react";
+import { Plus, DeleteIcon, SquarePen } from "lucide-react";
 // import WorkoutForm from "@/components/WorkoutForm.tsx";
 import axios from "axios";
 import WorkoutForm from "@/components/WorkoutForm";
@@ -82,6 +82,7 @@ const Dashboard = ({ token }) => {
               <span>{workout.distance}km </span>
               <span>{workout.duration} minute(s)</span>
               <span>
+                <SquarePen className="w-5 h-5" />
                 <DeleteIcon className="w-5 h-5" />
               </span>
               <br></br>
