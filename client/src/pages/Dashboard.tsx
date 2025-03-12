@@ -2,12 +2,19 @@ import React, { useEffect, useState } from "react";
 import { Plus, SquarePen, Trash2 } from "lucide-react";
 import axios from "axios";
 import WorkoutForm from "@/components/WorkoutForm";
-import { Link, Route, Routes, useLocation } from "react-router-dom";
+import {
+  Link,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 
 const Dashboard = () => {
   const [username, setUsername] = useState("");
   const [workouts, setWorkouts] = useState([]);
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   const fetchUsername = async () => {
     try {
@@ -54,6 +61,12 @@ const Dashboard = () => {
     console.log(location.pathname);
   };
 
+  const signOutButton = () => {
+    localStorage.clear();
+    navigate(0);
+    console.log("The local storage has been cleared");
+  };
+
   useEffect(() => {
     fetchUsername();
     fetchUserWorkouts();
@@ -65,6 +78,12 @@ const Dashboard = () => {
         <>
           <div>
             <span>Welcome {username}!</span>
+            <button
+              className="bg-red-500 text-white flex items-center gap-2 px-8 py-1 rounded-md"
+              onClick={signOutButton}
+            >
+              Sign out
+            </button>
           </div>
           {/* <button className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"> */}
           <Link to="/workout-log">

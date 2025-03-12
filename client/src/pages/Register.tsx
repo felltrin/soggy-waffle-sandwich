@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -14,6 +15,7 @@ function Register() {
     password: "",
     confirmPassword: "",
   });
+  const navigate = useNavigate();
 
   /**
    * Puts the user input through a security check like the TSA
@@ -101,6 +103,8 @@ function Register() {
       localStorage.setItem("token", access_token);
       // setToken(access_token);
       alert(response.data.message);
+      navigate("/");
+      navigate(0);
     } catch (error) {
       console.error(
         "Registration failed:",
