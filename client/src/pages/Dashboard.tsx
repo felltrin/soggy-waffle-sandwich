@@ -61,7 +61,22 @@ const Dashboard = () => {
     console.log(location.pathname);
   };
 
-  const signOutButton = () => {
+  const signOutButton = async () => {
+    try {
+      const response = await axios.delete("http://127.0.0.1:8080/auth/logout", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(response.data.message);
+    } catch (error) {
+      console.error(
+        "Failed to sign out user:",
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        error.response?.data?.msg || error.message
+      );
+    }
     localStorage.clear();
     navigate(0);
     console.log("The local storage has been cleared");
@@ -79,7 +94,7 @@ const Dashboard = () => {
           <div>
             <span>Welcome {username}!</span>
             <button
-              className="bg-red-500 text-white flex items-center gap-2 px-8 py-1 rounded-md"
+              className="bg-red-500 text-white flex items-center gap-2 px-8 py-1 rounded-md hover:bg-red-600"
               onClick={signOutButton}
             >
               Sign out
