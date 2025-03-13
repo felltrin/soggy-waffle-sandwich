@@ -56,6 +56,7 @@ const Dashboard = () => {
   const pathname = location.pathname;
   const condition = pathname === "/";
 
+  // TODO: the buttons that use this must be changed
   const buttonClick = () => {
     console.log("You clicked the button!");
     console.log(location.pathname);
@@ -115,10 +116,12 @@ const Dashboard = () => {
               <span>{workout.created} </span>
               <span>{workout.distance}km </span>
               <span>{workout.duration} minute(s)</span>
-              <span>
-                <SquarePen className="w-5 h-5" />
-                <Trash2 className="w-5 h-5" />
-              </span>
+              <button>
+                <SquarePen className="w-5 h-5 mx-2" onClick={buttonClick} />
+              </button>
+              <button>
+                <Trash2 className="w-5 h-5 mx-2" onClick={buttonClick} />
+              </button>
               <br></br>
             </div>
           ))}
