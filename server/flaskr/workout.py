@@ -106,4 +106,21 @@ def delete(id):
     db = get_db()
     db.execute("DELETE FROM workout WHERE id = ?", (id,))
     db.commit()
-    return redirect(url_for("workout.index"))
+    workouts = db.execute(
+        "SELECT w.id, created, distance, duration, user_id"
+        " FROM workout w WHERE w.user_id = ?"
+        "  ORDER BY created DESC",
+        (current_user["id"],),
+    ).fetchall()
+
+    workout_arr = []
+    for workout in workouts:
+        workout_obj = {
+            "id": workout["id"],
+            "created": workout["created"],
+            "duration": workout["duration"],
+            "distance": workout["distance"],
+        }
+        workout_arr.append(workout_obj)
+
+    return jsonify({"message": "Workout has been successfully deleted", "workouts": workout_arr}), 200
