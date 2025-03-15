@@ -127,6 +127,4 @@ def modify_token():
             401,
         )
     else:
-        # print("JWT Revoked")
-        # return redirect(url_for("auth.login"))
-        return jsonify({"message": "JWT Revoked; user has logged out"})
+        return jsonify({"message": "JWT Revoked; user has logged out"}), 200

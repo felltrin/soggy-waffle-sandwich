@@ -62,6 +62,28 @@ const Dashboard = () => {
     console.log(location.pathname);
   };
 
+  const onDelete = async (workoutId: number) => {
+    const url = `http://127.0.0.1:8080/${workoutId}/delete`;
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    try {
+      const response = await axios({
+        method: "post",
+        url: url,
+        headers: headers,
+      });
+      setWorkouts(response.data.workouts);
+    } catch (error) {
+      console.error(
+        "Failed to delete workout log:",
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        error.response?.data?.msg || error.message
+      );
+    }
+  };
+
   const signOutButton = async () => {
     try {
       const response = await axios.delete("http://127.0.0.1:8080/auth/logout", {
@@ -94,25 +116,15 @@ const Dashboard = () => {
         <>
           <div>
             <span>Welcome {username}!</span>
-            <button
-              className="bg-red-500 text-white flex items-center gap-2 px-8 py-1 rounded-md hover:bg-red-600"
-              onClick={signOutButton}
-            >
-              Sign out
-            </button>
           </div>
-          {/* <button className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"> */}
           <Link to="/workout-log">
-            <button
-              className="px-8 py-1 bg-blue-500 text-white rounded-md flex items-center gap-2 hover:bg-blue-600"
-              onClick={buttonClick}
-            >
+            <button className="px-8 py-1 bg-blue-500 text-white rounded-md flex items-center gap-2 hover:bg-blue-600">
               <Plus className="w-5 h-5" />
               Add workout
             </button>
           </Link>
           {workouts.map((workout, index) => (
-            <div key={index}>
+            <div key={index} className="px-2">
               <span>{workout.created} </span>
               <span>{workout.distance}km </span>
               <span>{workout.duration} minute(s)</span>
@@ -120,11 +132,22 @@ const Dashboard = () => {
                 <SquarePen className="w-5 h-5 mx-2" onClick={buttonClick} />
               </button>
               <button>
-                <Trash2 className="w-5 h-5 mx-2" onClick={buttonClick} />
+                <Trash2
+                  className="w-5 h-5 mx-2"
+                  onClick={() => onDelete(workout.id)}
+                />
               </button>
               <br></br>
             </div>
           ))}
+          <div className="py-4 px-2">
+            <button
+              className="bg-red-500 text-white flex items-center gap-2 px-8 py-1 rounded-md hover:bg-red-600"
+              onClick={signOutButton}
+            >
+              Sign out
+            </button>
+          </div>
         </>
       ) : (
         <></>
