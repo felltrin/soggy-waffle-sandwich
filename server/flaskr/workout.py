@@ -48,8 +48,24 @@ def create():
                 (duration, distance, current_user["id"]),
             )
             db.commit()
-            # return redirect(url_for("workout.index"))
-            return jsonify({"message": "Workout Added", "data": f"{duration}, {distance}"})
+            workouts = db.execute(
+                "SELECT w.id, created, distance, duration, user_id"
+                " FROM workout w WHERE w.user_id = ?"
+                "  ORDER BY created DESC",
+                (current_user["id"],),
+            ).fetchall()
+
+            workout_arr = []
+            for workout in workouts:
+                workout_obj = {
+                    "id": workout["id"],
+                    "created": workout["created"],
+                    "duration": workout["duration"],
+                    "distance": workout["distance"],
+                }
+                workout_arr.append(workout_obj)
+
+            return jsonify({"message": "Workout Added", "data": f"{duration}, {distance}", "workouts": workout_arr})
 
 
 def get_workout(id, check_author=True):

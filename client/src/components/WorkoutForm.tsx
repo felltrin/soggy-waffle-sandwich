@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function WorkoutForm({ token }) {
+function WorkoutForm({ token, setWorkouts }) {
   const [formData, setFormData] = useState({
     distance: 0.0,
     duration: 0.0,
@@ -25,6 +25,7 @@ function WorkoutForm({ token }) {
         }
       );
       console.log("Data recieved:", response.data);
+      setWorkouts(response.data.workouts);
     } catch (error) {
       console.error(
         "Failed to fetch protected data:",
@@ -35,7 +36,7 @@ function WorkoutForm({ token }) {
     }
 
     navigate("/");
-    navigate(0);
+    // navigate(0);
   };
 
   return (

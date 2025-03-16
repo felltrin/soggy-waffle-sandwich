@@ -153,7 +153,10 @@ const Dashboard = () => {
         <></>
       )}
       <Routes>
-        <Route path="/workout-log" element={<WorkoutForm token={token} />} />
+        <Route
+          path="/workout-log"
+          element={<WorkoutForm token={token} setWorkouts={setWorkouts} />}
+        />
       </Routes>
     </>
   );
