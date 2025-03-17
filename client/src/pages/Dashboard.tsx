@@ -14,6 +14,7 @@ import UpdateForm from "@/components/UpdateForm";
 const Dashboard = () => {
   const [username, setUsername] = useState("");
   const [workouts, setWorkouts] = useState([]);
+  const [workoutToUpdateId, setWorkoutUpdateId] = useState(0);
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
@@ -56,10 +57,6 @@ const Dashboard = () => {
   const location = useLocation();
   const pathname = location.pathname;
   const condition = pathname === "/";
-
-  const editButtonClick = () => {
-    console.log("You clicked the edit button!");
-  };
 
   const onDelete = async (workoutId: number) => {
     const url = `http://127.0.0.1:8080/${workoutId}/delete`;
@@ -132,7 +129,8 @@ const Dashboard = () => {
                 <button>
                   <SquarePen
                     className="w-5 h-5 mx-2"
-                    onClick={editButtonClick}
+                    // onClick={() => editButtonClick(workout.id)}
+                    onClick={() => setWorkoutUpdateId(workout.id)}
                   />
                 </button>
               </Link>
@@ -162,7 +160,10 @@ const Dashboard = () => {
           path="/workout-log"
           element={<WorkoutForm token={token} setWorkouts={setWorkouts} />}
         />
-        <Route path="/update-log" element={<UpdateForm />} />
+        <Route
+          path="/update-log"
+          element={<UpdateForm token={token} workoutId={workoutToUpdateId} />}
+        />
       </Routes>
     </>
   );
