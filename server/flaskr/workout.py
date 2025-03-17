@@ -92,15 +92,14 @@ def get_workout(id, check_author=True):
 @bp.route("/<int:id>/update", methods=['GET', "POST"])
 @jwt_required()
 def update(id):
-    # FIXME: add functionality for a GET request
     if request.method == "GET":
         workout = get_workout(id)
         return jsonify({"duration": workout["duration"], "distance": workout["distance"]});
 
     if request.method == "POST":
         data = request.get_json()
-        distance = data["distance"]
-        duration = data["duration"]
+        distance = data["workout"]["distance"]
+        duration = data["workout"]["duration"]
         error = None
 
         if not distance:
@@ -115,8 +114,24 @@ def update(id):
                 (distance, duration, id),
             )
             db.commit()
+            workouts = db.execute(
+                "SELECT w.id, created, distance, duration, user_id"
+                " FROM workout w WHERE w.user_id = ?"
+                "  ORDER BY created DESC",
+                (current_user["id"],),
+            ).fetchall()
+
+            workout_arr = []
+            for workout in workouts:
+                workout_obj = {
+                    "id": workout["id"],
+                    "created": workout["created"],
+                    "duration": workout["duration"],
+                    "distance": workout["distance"],
+                }
+                workout_arr.append(workout_obj)
             # return redirect(url_for("workout.index"))
-            return jsonify({"message": "Workout has been successfully updated"}), 200
+            return jsonify({"message": "Workout has been successfully updated", "workouts": workout_arr}), 200
 
 
 @bp.route("/<int:id>/delete", methods=["POST"])

@@ -3,17 +3,40 @@ import { ArrowLeft } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function UpdateForm({ token, workoutId }) {
+function UpdateForm({ token, workoutId, setWorkouts }) {
   const [workout, setWorkout] = useState({
     duration: 0.0,
     distance: 0.0,
   });
   const nav = useNavigate();
 
-  const handleUpdateSubmit = (e: React.FormEvent) => {
+  const handleUpdateSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const url = `http://127.0.0.1:8080/${workoutId}/update`;
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
 
-    console.log("you pressed the submit button");
+    try {
+      const response = await axios({
+        method: "post",
+        url: url,
+        headers: headers,
+        data: {
+          workout,
+        },
+      });
+      setWorkouts(response.data.workouts);
+    } catch (error) {
+      console.error(
+        "Failed to update workout:",
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        error.response?.data?.msg || error.message
+      );
+    }
+
+    nav("/");
   };
 
   const fetchWorkoutToUpdate = async () => {
