@@ -1,8 +1,13 @@
+import axios from "axios";
 import { ArrowLeft } from "lucide-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function UpdateForm() {
+function UpdateForm({ token, workoutId }) {
+  const [workout, setWorkout] = useState({
+    duration: 0.0,
+    distance: 0.0,
+  });
   const nav = useNavigate();
 
   const handleUpdateSubmit = (e: React.FormEvent) => {
@@ -11,15 +16,41 @@ function UpdateForm() {
     console.log("you pressed the submit button");
   };
 
-  const backButton = () => {
-    // console.log("you pressed the back button");
-    nav("/");
+  const fetchWorkoutToUpdate = async () => {
+    const url = `http://127.0.0.1:8080/${workoutId}/update`;
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    try {
+      const response = await axios({
+        method: "get",
+        url: url,
+        headers: headers,
+      });
+      setWorkout({
+        ...workout,
+        duration: response.data.duration,
+        distance: response.data.distance,
+      });
+    } catch (error) {
+      console.error(
+        "Failed to retrieve workout:",
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        error.response?.data?.msg || error.message
+      );
+    }
   };
+
+  useEffect(() => {
+    fetchWorkoutToUpdate();
+  }, []);
 
   return (
     <div className="min-h-screen flex items-start justify-center bg-gray-50 p-8">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <button onClick={backButton}>
+        <button onClick={() => nav("/")}>
           <ArrowLeft />
         </button>
         <form onSubmit={handleUpdateSubmit} className="max-w-md">
@@ -29,10 +60,10 @@ function UpdateForm() {
               type="number"
               step="0.01"
               placeholder="Distance"
-              // value={12}
-              // onChange={(e) => {
-              //   setFormData({ ...formData, distance: +e.target.value });
-              // }}
+              value={workout.distance}
+              onChange={(e) => {
+                setWorkout({ ...workout, distance: +e.target.value });
+              }}
             />
             <label>km</label>
           </div>
@@ -43,10 +74,10 @@ function UpdateForm() {
               type="number"
               step="1"
               placeholder="Duration"
-              // value={12}
-              // onChange={(e) => {
-              //   setFormData({ ...formData, duration: +e.target.value });
-              // }}
+              value={workout.duration}
+              onChange={(e) => {
+                setWorkout({ ...workout, duration: +e.target.value });
+              }}
             />
             <label>minutes</label>
           </div>
