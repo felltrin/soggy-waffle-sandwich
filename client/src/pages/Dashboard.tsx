@@ -162,7 +162,13 @@ const Dashboard = () => {
         />
         <Route
           path="/update-log"
-          element={<UpdateForm token={token} workoutId={workoutToUpdateId} />}
+          element={
+            <UpdateForm
+              token={token}
+              workoutId={workoutToUpdateId}
+              setWorkouts={setWorkouts}
+            />
+          }
         />
       </Routes>
     </>
