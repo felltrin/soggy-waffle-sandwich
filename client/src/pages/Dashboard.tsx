@@ -9,6 +9,7 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
+import UpdateForm from "@/components/UpdateForm";
 
 const Dashboard = () => {
   const [username, setUsername] = useState("");
@@ -56,10 +57,8 @@ const Dashboard = () => {
   const pathname = location.pathname;
   const condition = pathname === "/";
 
-  // TODO: the buttons that use this must be changed
-  const buttonClick = () => {
-    console.log("You clicked the button!");
-    console.log(location.pathname);
+  const editButtonClick = () => {
+    console.log("You clicked the edit button!");
   };
 
   const onDelete = async (workoutId: number) => {
@@ -101,6 +100,7 @@ const Dashboard = () => {
       );
     }
     localStorage.clear();
+    // TODO: fix this
     navigate(0);
     console.log("The local storage has been cleared");
   };
@@ -128,9 +128,14 @@ const Dashboard = () => {
               <span>{workout.created} </span>
               <span>{workout.distance}km </span>
               <span>{workout.duration} minute(s)</span>
-              <button>
-                <SquarePen className="w-5 h-5 mx-2" onClick={buttonClick} />
-              </button>
+              <Link to="/update-log">
+                <button>
+                  <SquarePen
+                    className="w-5 h-5 mx-2"
+                    onClick={editButtonClick}
+                  />
+                </button>
+              </Link>
               <button>
                 <Trash2
                   className="w-5 h-5 mx-2"
@@ -157,6 +162,7 @@ const Dashboard = () => {
           path="/workout-log"
           element={<WorkoutForm token={token} setWorkouts={setWorkouts} />}
         />
+        <Route path="/update-log" element={<UpdateForm />} />
       </Routes>
     </>
   );

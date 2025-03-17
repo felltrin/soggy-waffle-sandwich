@@ -92,9 +92,9 @@ def get_workout(id, check_author=True):
 @bp.route("/<int:id>/update", methods=["POST"])
 @jwt_required()
 def update(id):
+    # FIXME: add functionality for a GET request
     workout = get_workout(id)
 
-    # FIXME: add functionality for a GET request
     data = request.get_json()
     distance = data["distance"]
     duration = data["duration"]

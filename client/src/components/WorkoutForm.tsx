@@ -36,7 +36,6 @@ function WorkoutForm({ token, setWorkouts }) {
     }
 
     navigate("/");
-    // navigate(0);
   };
 
   return (
@@ -71,14 +70,12 @@ function WorkoutForm({ token, setWorkouts }) {
             <label>minutes</label>
           </div>
 
-          {/* <Link to="*"> */}
           <button
             type="submit"
             className="w-3/4 bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
           >
             Submit
           </button>
-          {/* </Link> */}
         </form>
       </div>
     </div>
