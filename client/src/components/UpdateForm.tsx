@@ -11,15 +11,10 @@ function UpdateForm() {
     console.log("you pressed the submit button");
   };
 
-  const backButton = () => {
-    // console.log("you pressed the back button");
-    nav("/");
-  };
-
   return (
     <div className="min-h-screen flex items-start justify-center bg-gray-50 p-8">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <button onClick={backButton}>
+        <button onClick={() => nav("/")}>
           <ArrowLeft />
         </button>
         <form onSubmit={handleUpdateSubmit} className="max-w-md">
