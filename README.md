@@ -6,10 +6,10 @@ This is a web application for tracking run times and distances
 
 - [x] Build Backend
 - [x] Connect backend to frontend
-- [ ] Create Frontend
+- [x] Create Frontend
   - [x] Login/Register Pages
   - [x] Workout Logging Page
-  - [ ] Dashboard
+  - [x] Dashboard
 - [ ] Styling (w/ Tailwind)
 - [ ] Test the app
 - [ ] Deploy
