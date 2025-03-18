@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import FormInput from "@/components/FormInput";
+import FormButton from "@/components/FormButton";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -33,37 +35,39 @@ function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+      <div className="bg-white p-12 rounded-2xl shadow-md w-full max-w-lg">
+        <h2 className="text-3xl font-semibold mb-6 text-left">
+          Login to your account
+        </h2>
         <form onSubmit={handleLogin} className="max-w-md mx-auto">
-          <div className="mb-4">
-            <label className="block mb-2">Username</label>
-            <input
-              type="text"
-              placeholder="Username"
+          <div className="mb-6">
+            <label className="block mb-2 font-light">Username</label>
+            <FormInput
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="w-full px-3 py-2 border rounded"
+              setValue={setUsername}
+              placeholder={"Enter your username"}
+              type={"text"}
             />
           </div>
 
-          <div className="mb-4">
-            <label className="block mb-2">Password</label>
-            <input
-              type="password"
-              placeholder="Password"
+          <div className="mb-6">
+            <div className="flex items-center justify-between">
+              <label className="block mb-2 font-light">Password</label>
+              <a className="text-right text-blue-500">Forgot?</a>
+            </div>
+            <FormInput
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3 py-2 border rounded"
+              setValue={setPassword}
+              placeholder={"Enter your password"}
+              type={"password"}
             />
           </div>
 
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
-          >
-            Login
-          </button>
+          <FormButton buttonText={"Login now"} />
+          <div className="flex items-center justify-center align-text-bottom pt-4">
+            <p className="pr-4 text-gray-400">Don't have an account?</p>
+            <a className="text-blue-500">Sign up</a>
+          </div>
         </form>
       </div>
     </div>

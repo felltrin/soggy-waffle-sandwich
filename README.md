@@ -13,3 +13,7 @@ This is a web application for tracking run times and distances
 - [ ] Styling (w/ Tailwind)
 - [ ] Test the app
 - [ ] Deploy
+
+## Resources
+
+- https://www.figma.com/community/file/1212785201447006833
