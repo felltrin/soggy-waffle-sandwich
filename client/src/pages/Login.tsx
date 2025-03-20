@@ -5,8 +5,10 @@ import FormInput from "@/components/FormInput";
 import FormButton from "@/components/FormButton";
 
 function Login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [userData, setUserData] = useState({
+    username: "",
+    password: "",
+  });
   const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -14,8 +16,7 @@ function Login() {
 
     try {
       const response = await axios.post("http://127.0.0.1:8080/auth/login", {
-        username,
-        password,
+        userData,
       });
 
       const { access_token } = response.data;
@@ -43,10 +44,12 @@ function Login() {
           <div className="mb-6">
             <label className="block mb-2 font-light">Username</label>
             <FormInput
-              value={username}
-              setValue={setUsername}
-              placeholder={"Enter your username"}
-              type={"text"}
+              type="text"
+              placeholder="Enter username"
+              value={userData.username}
+              onChange={(e) =>
+                setUserData({ ...userData, username: e.target.value })
+              }
             />
           </div>
 
@@ -56,10 +59,12 @@ function Login() {
               <a className="text-right text-blue-500">Forgot?</a>
             </div>
             <FormInput
-              value={password}
-              setValue={setPassword}
-              placeholder={"Enter your password"}
-              type={"password"}
+              type="password"
+              placeholder="Enter password"
+              value={userData.password}
+              onChange={(e) =>
+                setUserData({ ...userData, password: e.target.value })
+              }
             />
           </div>
 

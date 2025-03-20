@@ -98,12 +98,11 @@ function Register() {
         formData,
       });
 
-      // const data = response.data;
       const { access_token } = response.data;
       localStorage.setItem("token", access_token);
-      // setToken(access_token);
       alert(response.data.message);
       navigate("/");
+      // TODO: fix this
       navigate(0);
     } catch (error) {
       console.error(
