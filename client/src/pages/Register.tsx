@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import FormInput from "@/components/FormInput";
+import FormButton from "@/components/FormButton";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -117,19 +119,20 @@ function Register() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h2 className="text-3xl font-bold mb-6 text-left">Create an account</h2>
+      <div className="bg-white p-12 rounded-2xl shadow-md w-full max-w-lg">
+        <h2 className="text-3xl font-semibold mb-6 text-left">
+          Create an account
+        </h2>
         <form onSubmit={handleRegister} className="max-w-md mx-auto">
           <div className="mb-4">
             <label className="block mb-2">Username</label>
-            <input
+            <FormInput
               type="text"
-              placeholder="Username"
+              placeholder="Enter username"
               value={formData.username}
               onChange={(e) =>
                 setFormData({ ...formData, username: e.target.value })
               }
-              className="w-full px-3 py-2 border rounded"
             />
             {errors.username && (
               <p className="text-red-500 text-sm mt-1">{errors.username}</p>
@@ -138,15 +141,13 @@ function Register() {
 
           <div className="mb-4">
             <label className="block mb-2">Email</label>
-            <input
+            <FormInput
               type="email"
-              id="email"
-              placeholder="Email"
+              placeholder="Enter email"
               value={formData.email}
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
               }
-              className="w-full px-3 py-2 border rounded"
             />
             {errors.email && (
               <p className="text-red-500 text-sm mt-1">{errors.email}</p>
@@ -155,14 +156,13 @@ function Register() {
 
           <div className="mb-4">
             <label className="block mb-2">Password</label>
-            <input
+            <FormInput
               type="password"
-              placeholder="Password"
+              placeholder="Enter password"
               value={formData.password}
               onChange={(e) =>
                 setFormData({ ...formData, password: e.target.value })
               }
-              className="w-full px-3 py-2 border rounded"
             />
             {errors.password && (
               <p className="text-red-500 text-sm mt-1">{errors.password}</p>
@@ -171,15 +171,13 @@ function Register() {
 
           <div className="mb-4">
             <label className="block mb-2">Confirm password</label>
-            <input
+            <FormInput
               type="password"
-              id="confirmPassword"
               placeholder="Enter password again"
               value={formData.confirmPassword}
               onChange={(e) =>
                 setFormData({ ...formData, confirmPassword: e.target.value })
               }
-              className="w-full px-3 py-2 border rounded"
             />
             {errors.confirmPassword && (
               <p className="text-red-500 text-sm mt-1">
@@ -188,12 +186,11 @@ function Register() {
             )}
           </div>
 
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
-          >
-            Register
-          </button>
+          <FormButton buttonText={"Create account"} />
+          <div className="flex items-center justify-center align-text-bottom pt-4">
+            <p className="pr-4 text-gray-400">Already have an account?</p>
+            <a className="text-blue-500">Log in</a>
+          </div>
         </form>
       </div>
     </div>

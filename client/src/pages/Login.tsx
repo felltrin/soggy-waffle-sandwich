@@ -21,7 +21,7 @@ function Login() {
 
       const { access_token } = response.data;
       localStorage.setItem("token", access_token);
-      alert(response.data.message);
+      // alert(response.data.message);
       navigate(0);
     } catch (error) {
       console.error(

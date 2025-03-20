@@ -37,7 +37,6 @@ def register():
     data = request.get_json()
     username = data["formData"]["username"]
     password = data["formData"]["password"]
-    print("Received data:", username, password)
     db = get_db()
 
     if not username:
@@ -81,7 +80,6 @@ def login():
         data = request.get_json()
         username = data["userData"]["username"]
         password = data["userData"]["password"]
-        # print("Received data:", username, password)
 
         db = get_db()
         user = db.execute(
