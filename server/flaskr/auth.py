@@ -79,8 +79,8 @@ def register():
 def login():
     if request.method == "POST":
         data = request.get_json()
-        username = data["username"]
-        password = data["password"]
+        username = data["userData"]["username"]
+        password = data["userData"]["password"]
         # print("Received data:", username, password)
 
         db = get_db()
