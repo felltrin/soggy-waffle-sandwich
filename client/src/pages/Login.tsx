@@ -42,7 +42,7 @@ function Login() {
         </h2>
         <form onSubmit={handleLogin} className="max-w-md mx-auto">
           <div className="mb-6">
-            <label className="block mb-2 font-light">Username</label>
+            <label className="block mb-2">Username</label>
             <FormInput
               type="text"
               placeholder="Enter username"
@@ -55,7 +55,7 @@ function Login() {
 
           <div className="mb-6">
             <div className="flex items-center justify-between">
-              <label className="block mb-2 font-light">Password</label>
+              <label className="block mb-2">Password</label>
               <a className="text-right text-blue-500">Forgot?</a>
             </div>
             <FormInput
