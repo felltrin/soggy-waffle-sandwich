@@ -129,7 +129,6 @@ const Dashboard = () => {
                 <button>
                   <SquarePen
                     className="w-5 h-5 mx-2"
-                    // onClick={() => editButtonClick(workout.id)}
                     onClick={() => setWorkoutUpdateId(workout.id)}
                   />
                 </button>
