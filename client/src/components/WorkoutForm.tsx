@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import FormInput from "./FormInput";
 
 function WorkoutForm({ token, setWorkouts }) {
   const [formData, setFormData] = useState({
-    distance: 0.0,
-    duration: 0.0,
+    distance: "",
+    duration: "",
   });
   const navigate = useNavigate();
 
@@ -44,10 +45,9 @@ function WorkoutForm({ token, setWorkouts }) {
         <form onSubmit={handleSubmit} className="max-w-md">
           <div className="mb-4">
             <label>Distance</label>
-            <input
+            <FormInput
               type="number"
-              step="0.01"
-              placeholder="Distance"
+              placeholder="Enter distance"
               value={formData.distance}
               onChange={(e) => {
                 setFormData({ ...formData, distance: +e.target.value });
@@ -58,10 +58,9 @@ function WorkoutForm({ token, setWorkouts }) {
 
           <div className="mb-4">
             <label>Duration</label>
-            <input
+            <FormInput
               type="number"
-              step="1"
-              placeholder="Duration"
+              placeholder="Enter duration"
               value={formData.duration}
               onChange={(e) => {
                 setFormData({ ...formData, duration: +e.target.value });
