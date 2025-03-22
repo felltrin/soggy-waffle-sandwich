@@ -2,11 +2,13 @@ import axios from "axios";
 import { ArrowLeft } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import FormInput from "./FormInput";
+import FormButton from "./FormButton";
 
 function UpdateForm({ token, workoutId, setWorkouts }) {
   const [workout, setWorkout] = useState({
-    duration: 0.0,
-    distance: 0.0,
+    duration: "",
+    distance: "",
   });
   const nav = useNavigate();
 
@@ -79,10 +81,9 @@ function UpdateForm({ token, workoutId, setWorkouts }) {
         <form onSubmit={handleUpdateSubmit} className="max-w-md">
           <div className="mb-4">
             <label>Distance</label>
-            <input
+            <FormInput
               type="number"
-              step="0.01"
-              placeholder="Distance"
+              placeholder="Enter distance"
               value={workout.distance}
               onChange={(e) => {
                 setWorkout({ ...workout, distance: +e.target.value });
@@ -93,10 +94,9 @@ function UpdateForm({ token, workoutId, setWorkouts }) {
 
           <div className="mb-4">
             <label>Duration</label>
-            <input
+            <FormInput
               type="number"
-              step="1"
-              placeholder="Duration"
+              placeholder="Enter duration"
               value={workout.duration}
               onChange={(e) => {
                 setWorkout({ ...workout, duration: +e.target.value });
@@ -105,12 +105,7 @@ function UpdateForm({ token, workoutId, setWorkouts }) {
             <label>minutes</label>
           </div>
 
-          <button
-            type="submit"
-            className="w-3/4 bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
-          >
-            Submit
-          </button>
+          <FormButton buttonText={"Submit"} />
         </form>
       </div>
     </div>
