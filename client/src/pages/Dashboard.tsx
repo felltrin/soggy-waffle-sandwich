@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Plus, SquarePen, Trash2 } from "lucide-react";
+import { Plus } from "lucide-react";
 import axios from "axios";
 import WorkoutForm from "@/components/WorkoutForm";
 import {
@@ -10,6 +10,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import UpdateForm from "@/components/UpdateForm";
+import WorkoutCard from "@/components/WorkoutCard";
 
 const Dashboard = () => {
   const [username, setUsername] = useState("");
@@ -121,26 +122,12 @@ const Dashboard = () => {
             </button>
           </Link>
           {workouts.map((workout, index) => (
-            <div key={index} className="px-2">
-              <span>{workout.created} </span>
-              <span>{workout.distance}km </span>
-              <span>{workout.duration} minute(s)</span>
-              <Link to="/update-log">
-                <button>
-                  <SquarePen
-                    className="w-5 h-5 mx-2"
-                    onClick={() => setWorkoutUpdateId(workout.id)}
-                  />
-                </button>
-              </Link>
-              <button>
-                <Trash2
-                  className="w-5 h-5 mx-2"
-                  onClick={() => onDelete(workout.id)}
-                />
-              </button>
-              <br></br>
-            </div>
+            <WorkoutCard
+              workout={workout}
+              index={index}
+              setWorkoutUpdateId={setWorkoutUpdateId}
+              onDelete={onDelete}
+            />
           ))}
           <div className="py-4 px-2">
             <button
