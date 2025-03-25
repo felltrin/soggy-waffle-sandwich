@@ -5,7 +5,7 @@ const WorkoutCard = ({ workout, index, setWorkoutUpdateId, onDelete }) => {
   return (
     <>
       <div key={index} className="px-2">
-        <span>{workout.created} </span>
+        <span>{workout.created.substring(0, 16)} </span>
         <span>{workout.distance}km </span>
         <span>{workout.duration} minute(s)</span>
         <Link to="/update-log">
