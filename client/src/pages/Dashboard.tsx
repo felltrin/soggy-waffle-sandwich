@@ -143,7 +143,7 @@ const Dashboard = () => {
 
           <div className="py-4 px-2">
             <button
-              className="bg-red-500 text-white flex items-center gap-2 px-8 py-1 rounded-md hover:bg-red-600"
+              className="bg-red-500 text-white flex items-center gap-2 px-8 py-1 rounded-md hover:bg-red-600 cursor-pointer"
               onClick={signOutButton}
             >
               Sign out

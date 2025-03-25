@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import FormInput from "./FormInput";
+import { ArrowLeft } from "lucide-react";
 
 function WorkoutForm({ token, setWorkouts }) {
   const [formData, setFormData] = useState({
@@ -42,6 +43,9 @@ function WorkoutForm({ token, setWorkouts }) {
   return (
     <div className="min-h-screen flex items-start justify-center bg-gray-50 p-8">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <button onClick={() => navigate("/")}>
+          <ArrowLeft />
+        </button>
         <form onSubmit={handleSubmit} className="max-w-md">
           <div className="mb-4">
             <label>Distance</label>
