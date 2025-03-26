@@ -128,7 +128,7 @@ const Dashboard = () => {
                 </Link>
               </div>
 
-              <div className="bg-gray-100 p-6 rounded-xl">
+              <div className="container bg-gray-100 p-6 rounded-xl">
                 {workouts.map((workout, index) => (
                   <Workout
                     workout={workout}
