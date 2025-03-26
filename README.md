@@ -17,3 +17,4 @@ This is a web application for tracking run times and distances
 ## Resources
 
 - https://www.figma.com/community/file/1212785201447006833
+- https://miro.medium.com/v2/resize:fit:1400/0*rgxBZQVyrT1iiLIA.png

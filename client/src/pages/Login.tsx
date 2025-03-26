@@ -3,7 +3,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import FormInput from "@/components/FormInput";
 import FormButton from "@/components/FormButton";
-import { Input } from "@/components/ui/input";
 
 function Login() {
   const [userData, setUserData] = useState({
