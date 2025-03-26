@@ -10,7 +10,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import UpdateForm from "@/components/UpdateForm";
-import WorkoutCard from "@/components/WorkoutCard";
+import Workout from "@/components/Workout";
 
 const Dashboard = () => {
   const [username, setUsername] = useState("");
@@ -113,25 +113,37 @@ const Dashboard = () => {
       {condition ? (
         <>
           <div>
-            <span>Welcome {username}!</span>
+            <h2 className="text-2xl font-semibold text-gray-800 dark:text-white text-center">
+              Welcome {username}!
+            </h2>
           </div>
-          <Link to="/workout-log">
-            <button className="px-8 py-1 bg-blue-500 text-white rounded-md flex items-center gap-2 hover:bg-blue-600">
-              <Plus className="w-5 h-5" />
-              Add workout
-            </button>
-          </Link>
-          {workouts.map((workout, index) => (
-            <WorkoutCard
-              workout={workout}
-              index={index}
-              setWorkoutUpdateId={setWorkoutUpdateId}
-              onDelete={onDelete}
-            />
-          ))}
+          <div className="flex justify-center items-center">
+            <div className="w-full max-w-xl">
+              <div className="mb-2">
+                <Link to="/workout-log">
+                  <button className="px-4 py-2 bg-blue-500 text-white rounded-md flex items-center gap-2 hover:bg-blue-600 cursor-pointer">
+                    <Plus className="w-5 h-5" />
+                    Add Workout
+                  </button>
+                </Link>
+              </div>
+
+              <div className="container bg-gray-100 p-6 rounded-xl">
+                {workouts.map((workout, index) => (
+                  <Workout
+                    workout={workout}
+                    index={index}
+                    setWorkoutUpdateId={setWorkoutUpdateId}
+                    onDelete={onDelete}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
           <div className="py-4 px-2">
             <button
-              className="bg-red-500 text-white flex items-center gap-2 px-8 py-1 rounded-md hover:bg-red-600"
+              className="bg-red-500 text-white flex items-center gap-2 px-8 py-1 rounded-md hover:bg-red-600 cursor-pointer"
               onClick={signOutButton}
             >
               Sign out

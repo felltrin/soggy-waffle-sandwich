@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import FormInput from "./FormInput";
+import { ArrowLeft } from "lucide-react";
+import FormButton from "./FormButton";
 
 function WorkoutForm({ token, setWorkouts }) {
   const [formData, setFormData] = useState({
@@ -42,6 +44,12 @@ function WorkoutForm({ token, setWorkouts }) {
   return (
     <div className="min-h-screen flex items-start justify-center bg-gray-50 p-8">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <button
+          onClick={() => navigate("/")}
+          className="bg-gray-200 p-2 rounded-lg transition-colors duration-200 hover:bg-gray-300 dark:hover:bg-gray-600 cursor-pointer"
+        >
+          <ArrowLeft />
+        </button>
         <form onSubmit={handleSubmit} className="max-w-md">
           <div className="mb-4">
             <label>Distance</label>
@@ -69,12 +77,7 @@ function WorkoutForm({ token, setWorkouts }) {
             <label>minutes</label>
           </div>
 
-          <button
-            type="submit"
-            className="w-3/4 bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
-          >
-            Submit
-          </button>
+          <FormButton buttonText={"Add Workout"} />
         </form>
       </div>
     </div>
