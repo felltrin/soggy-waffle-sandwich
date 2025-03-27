@@ -38,6 +38,10 @@ function UpdateForm({ token, workoutId, setWorkouts }) {
       );
     }
 
+    setWorkout({
+      duration: "",
+      distance: "",
+    });
     nav("/");
   };
 
