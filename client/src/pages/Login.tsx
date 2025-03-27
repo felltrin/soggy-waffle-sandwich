@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FormInput from "@/components/FormInput";
 import FormButton from "@/components/FormButton";
 
@@ -71,7 +71,9 @@ function Login() {
           <FormButton buttonText={"Login now"} />
           <div className="flex items-center justify-center align-text-bottom pt-4">
             <p className="pr-4 text-gray-400">Don't have an account?</p>
-            <a className="text-blue-500">Sign up</a>
+            <Link to={"/register"}>
+              <a className="text-blue-500">Sign up</a>
+            </Link>
           </div>
         </form>
       </div>
