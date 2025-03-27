@@ -38,10 +38,15 @@ function UpdateForm({ token, workoutId, setWorkouts }) {
       );
     }
 
+    setWorkout({
+      duration: "",
+      distance: "",
+    });
     nav("/");
   };
 
   const fetchWorkoutToUpdate = async () => {
+    console.log(workoutId);
     const url = `http://127.0.0.1:8080/${workoutId}/update`;
     const headers = {
       Authorization: `Bearer ${token}`,

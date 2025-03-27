@@ -2,13 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Plus } from "lucide-react";
 import axios from "axios";
 import WorkoutForm from "@/components/WorkoutForm";
-import {
-  Link,
-  Route,
-  Routes,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import UpdateForm from "@/components/UpdateForm";
 import Workout from "@/components/Workout";
 
@@ -113,19 +107,29 @@ const Dashboard = () => {
       {condition ? (
         <>
           <div>
-            <h2 className="text-2xl font-semibold text-gray-800 dark:text-white text-center">
-              Welcome {username}!
-            </h2>
+            <div className="flex items-center justify-center">
+              <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">
+                Welcome {username}!
+              </h2>
+            </div>
           </div>
           <div className="flex justify-center items-center">
             <div className="w-full max-w-xl">
-              <div className="mb-2">
-                <Link to="/workout-log">
-                  <button className="px-4 py-2 bg-blue-500 text-white rounded-md flex items-center gap-2 hover:bg-blue-600 cursor-pointer">
-                    <Plus className="w-5 h-5" />
-                    Add Workout
-                  </button>
-                </Link>
+              <div className="flex items-start justify-between mb-2">
+                <button
+                  className="px-4 py-2 mb-2 bg-blue-500 text-white rounded-md flex items-center gap-2 hover:bg-blue-600 cursor-pointer"
+                  onClick={() => navigate("/workout-log")}
+                >
+                  <Plus className="w-5 h-5" />
+                  Add Workout
+                </button>
+
+                <button
+                  className="bg-red-500 text-white flex items-center gap-2 px-8 py-1 rounded-md hover:bg-red-600 cursor-pointer justify-around"
+                  onClick={signOutButton}
+                >
+                  Sign out
+                </button>
               </div>
 
               <div className="container bg-gray-100 p-6 rounded-xl">
@@ -139,15 +143,6 @@ const Dashboard = () => {
                 ))}
               </div>
             </div>
-          </div>
-
-          <div className="py-4 px-2">
-            <button
-              className="bg-red-500 text-white flex items-center gap-2 px-8 py-1 rounded-md hover:bg-red-600 cursor-pointer"
-              onClick={signOutButton}
-            >
-              Sign out
-            </button>
           </div>
         </>
       ) : (
