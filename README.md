@@ -10,8 +10,10 @@ This is a web application for tracking run times and distances
   - [x] Login/Register Pages
   - [x] Workout Logging Page
   - [x] Dashboard
-- [ ] Styling (w/ Tailwind)
+- [x] Styling (w/ Tailwind)
 - [ ] Test the app
+  - [ ] Backend (w/ pytest)
+  - [ ] Frontend (w/ Jest)
 - [ ] Deploy
 
 ## Resources
