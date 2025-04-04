@@ -1,15 +1,14 @@
-import React, { useState } from "react";
-import { Link, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Login from "../pages/Login.tsx";
 import Register from "../pages/Register.tsx";
 import Dashboard from "@/pages/Dashboard.tsx";
+import Landing from "@/pages/Landing.tsx";
 import { SidebarProvider, SidebarTrigger } from "./ui/sidebar.tsx";
 import { AppSidebar } from "./app-sidebar.tsx";
 import WorkoutForm from "./WorkoutForm.tsx";
-import Landing from "@/pages/Landing.tsx";
+import React from "react";
 
 function Experience() {
-  // const [isLanding, setIsLanding] = useState(false);
   let token = null;
 
   if (localStorage.getItem("token")) {
