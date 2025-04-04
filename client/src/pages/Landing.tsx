@@ -11,7 +11,7 @@ export default function Landing() {
         <header className="px-4 lg:px-6 h-14 flex items-center">
           <Link className="flex items-center justify-center" to="#">
             <Dumbbell className="h-6 w-6 mr-2" />
-            <span className="font-bold">FitTrack</span>
+            <span className="font-bold">Worf</span>
           </Link>
           <nav className="ml-auto flex gap-4 sm:gap-6">
             <Link
@@ -49,8 +49,8 @@ export default function Landing() {
                     Track Your Fitness Journey
                   </h1>
                   <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                    FitTrack helps you monitor your workouts, set goals, and
-                    achieve your fitness dreams. Start your journey today!
+                    Worf helps you monitor your workouts, set goals, and achieve
+                    your fitness dreams. Start your journey today!
                   </p>
                 </div>
                 <div className="space-x-4">
@@ -108,7 +108,7 @@ export default function Landing() {
                   </h2>
                   <p className="max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
                     Join thousands of users who have transformed their lives
-                    with FitTrack. Sign up now and get your first month free!
+                    with Worf. Sign up now and get your first month free!
                   </p>
                   <div className="space-x-4">
                     <Link to="/register">
@@ -127,7 +127,7 @@ export default function Landing() {
         </main>
         <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
           <p className="text-xs text-gray-500 dark:text-gray-400">
-            © 2025 FitTrack. All rights reserved.
+            © 2025 Worf. All rights reserved.
           </p>
           <nav className="sm:ml-auto flex gap-4 sm:gap-6">
             <Link className="text-xs hover:underline underline-offset-4" to="#">
