@@ -1,20 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import Login from "../pages/Login.tsx";
 import Register from "../pages/Register.tsx";
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
 import Dashboard from "@/pages/Dashboard.tsx";
 import { SidebarProvider, SidebarTrigger } from "./ui/sidebar.tsx";
 import { AppSidebar } from "./app-sidebar.tsx";
 import WorkoutForm from "./WorkoutForm.tsx";
+import Landing from "@/pages/Landing.tsx";
 
 function Experience() {
+  // const [isLanding, setIsLanding] = useState(false);
   let token = null;
 
   if (localStorage.getItem("token")) {
@@ -25,26 +20,9 @@ function Experience() {
     <>
       {!token ? (
         <>
-          <NavigationMenu>
-            <NavigationMenuList>
-              <NavigationMenuItem>
-                <Link to="/">
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    Home
-                  </NavigationMenuLink>
-                </Link>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <Link to="/register">
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    Register
-                  </NavigationMenuLink>
-                </Link>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
           <Routes>
-            <Route path="/" element={<Login />} />
+            <Route path="/" element={<Landing />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Routes>
         </>
@@ -73,6 +51,7 @@ function Experience() {
           <Routes>
             <Route path="*" element={<Dashboard />} />
           </Routes>
+          {/* <Dashboard /> */}
         </>
       )}
     </>

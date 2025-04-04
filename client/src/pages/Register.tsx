@@ -189,7 +189,7 @@ function Register() {
           <FormButton buttonText={"Create account"} />
           <div className="flex items-center justify-center align-text-bottom pt-4">
             <p className="pr-4 text-gray-400">Already have an account?</p>
-            <Link to={"/"}>
+            <Link to={"/login"}>
               <a className="text-blue-500">Log in</a>
             </Link>
           </div>
