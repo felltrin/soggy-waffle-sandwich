@@ -46,6 +46,8 @@ function UpdateForm({ token, workoutId, setWorkouts }) {
   };
 
   const fetchWorkoutToUpdate = async () => {
+    console.log("workout id updating:", workoutId);
+
     const url = `http://127.0.0.1:8080/${workoutId}/update`;
     const headers = {
       Authorization: `Bearer ${token}`,

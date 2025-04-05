@@ -2,6 +2,11 @@ import { Pencil, Trash2 } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Workout = ({ workout, index, setWorkoutUpdateId, onDelete }) => {
+  // function workoutIdSet() {
+  //   console.log(workout.id);
+  //   setWorkoutUpdateId(workout.id);
+  // }
+
   return (
     <>
       <div
@@ -20,6 +25,7 @@ const Workout = ({ workout, index, setWorkoutUpdateId, onDelete }) => {
                 <Pencil
                   className="w-5 h-5"
                   onClick={() => setWorkoutUpdateId(workout.id)}
+                  // onClick={workoutIdSet}
                 />
               </div>
             </button>
