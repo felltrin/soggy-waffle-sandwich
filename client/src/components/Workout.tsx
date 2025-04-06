@@ -2,10 +2,10 @@ import { Pencil, Trash2 } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Workout = ({ workout, index, setWorkoutUpdateId, onDelete }) => {
-  // function workoutIdSet() {
-  //   console.log(workout.id);
-  //   setWorkoutUpdateId(workout.id);
-  // }
+  function workoutIdSet() {
+    console.log(workout.id);
+    setWorkoutUpdateId(workout.id);
+  }
 
   return (
     <>
@@ -20,13 +20,9 @@ const Workout = ({ workout, index, setWorkoutUpdateId, onDelete }) => {
         </div>
         <div className="flex items-center justify-center gap-x-4">
           <Link to="/update-log">
-            <button>
+            <button onClick={workoutIdSet}>
               <div className="flex items-center bg-gray-200 dark:bg-gray-700 p-2 rounded-lg transition-colors duration-200 hover:bg-gray-300 dark:hover:bg-gray-600 cursor-pointer">
-                <Pencil
-                  className="w-5 h-5"
-                  onClick={() => setWorkoutUpdateId(workout.id)}
-                  // onClick={workoutIdSet}
-                />
+                <Pencil className="w-5 h-5" />
               </div>
             </button>
           </Link>
