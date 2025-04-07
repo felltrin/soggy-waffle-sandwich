@@ -7,10 +7,7 @@ from flaskr.db import get_db
 bp = Blueprint("workout", __name__)
 
 
-@bp.route("/")
-@jwt_required()
-def index():
-    db = get_db()
+def get_workouts(db):
     workouts = db.execute(
         "SELECT w.id, created, distance, duration, user_id"
         " FROM workout w WHERE w.user_id = ?"
@@ -28,6 +25,14 @@ def index():
         }
         workout_arr.append(workout_obj)
 
+    return workout_arr
+
+
+@bp.route("/")
+@jwt_required()
+def index():
+    db = get_db()
+    workout_arr = get_workouts(db)
     return jsonify({"message": "Workouts Retrieved", "workouts": workout_arr})
 
 
@@ -48,23 +53,7 @@ def create():
                 (duration, distance, current_user["id"]),
             )
             db.commit()
-            workouts = db.execute(
-                "SELECT w.id, created, distance, duration, user_id"
-                " FROM workout w WHERE w.user_id = ?"
-                "  ORDER BY created DESC",
-                (current_user["id"],),
-            ).fetchall()
-
-            workout_arr = []
-            for workout in workouts:
-                workout_obj = {
-                    "id": workout["id"],
-                    "created": workout["created"],
-                    "duration": workout["duration"],
-                    "distance": workout["distance"],
-                }
-                workout_arr.append(workout_obj)
-
+            workout_arr = get_workouts(db)
             return jsonify({"message": "Workout Added", "data": f"{duration}, {distance}", "workouts": workout_arr})
 
 
@@ -114,23 +103,7 @@ def update(id):
                 (distance, duration, id),
             )
             db.commit()
-            workouts = db.execute(
-                "SELECT w.id, created, distance, duration, user_id"
-                " FROM workout w WHERE w.user_id = ?"
-                "  ORDER BY created DESC",
-                (current_user["id"],),
-            ).fetchall()
-
-            workout_arr = []
-            for workout in workouts:
-                workout_obj = {
-                    "id": workout["id"],
-                    "created": workout["created"],
-                    "duration": workout["duration"],
-                    "distance": workout["distance"],
-                }
-                workout_arr.append(workout_obj)
-            # return redirect(url_for("workout.index"))
+            workout_arr = get_workouts(db)
             return jsonify({"message": "Workout has been successfully updated", "workouts": workout_arr}), 200
 
 
@@ -141,21 +114,5 @@ def delete(id):
     db = get_db()
     db.execute("DELETE FROM workout WHERE id = ?", (id,))
     db.commit()
-    workouts = db.execute(
-        "SELECT w.id, created, distance, duration, user_id"
-        " FROM workout w WHERE w.user_id = ?"
-        "  ORDER BY created DESC",
-        (current_user["id"],),
-    ).fetchall()
-
-    workout_arr = []
-    for workout in workouts:
-        workout_obj = {
-            "id": workout["id"],
-            "created": workout["created"],
-            "duration": workout["duration"],
-            "distance": workout["distance"],
-        }
-        workout_arr.append(workout_obj)
-
+    workout_arr = get_workouts(db)
     return jsonify({"message": "Workout has been successfully deleted", "workouts": workout_arr}), 200
