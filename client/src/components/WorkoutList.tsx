@@ -80,14 +80,20 @@ function WorkoutList({ username, workouts, setWorkouts, setWorkoutUpdateId }) {
           </div>
 
           <div className="container bg-gray-100 p-6 rounded-xl">
-            {workouts.map((workout, index) => (
-              <Workout
-                workout={workout}
-                index={index}
-                setWorkoutUpdateId={setWorkoutUpdateId}
-                onDelete={onDelete}
-              />
-            ))}
+            {workouts.length > 0 ? (
+              <>
+                {workouts.map((workout, index) => (
+                  <Workout
+                    workout={workout}
+                    index={index}
+                    setWorkoutUpdateId={setWorkoutUpdateId}
+                    onDelete={onDelete}
+                  />
+                ))}
+              </>
+            ) : (
+              <>There are no workouts, please add a workout</>
+            )}
           </div>
         </div>
       </div>
