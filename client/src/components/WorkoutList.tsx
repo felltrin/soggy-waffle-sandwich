@@ -2,6 +2,7 @@ import { Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Workout from "./Workout";
+import EmptyCard from "./EmptyCard";
 
 function WorkoutList({ username, workouts, setWorkouts, setWorkoutUpdateId }) {
   const navigate = useNavigate();
@@ -79,9 +80,10 @@ function WorkoutList({ username, workouts, setWorkouts, setWorkoutUpdateId }) {
             </button>
           </div>
 
-          <div className="container bg-gray-100 p-6 rounded-xl">
+          {/* <div className="container bg-gray-100 p-6 rounded-xl"> */}
+          <div className="container mt-auto">
             {workouts.length > 0 ? (
-              <>
+              <div className="bg-gray-100 p-6 rounded-xl">
                 {workouts.map((workout, index) => (
                   <Workout
                     workout={workout}
@@ -90,9 +92,10 @@ function WorkoutList({ username, workouts, setWorkouts, setWorkoutUpdateId }) {
                     onDelete={onDelete}
                   />
                 ))}
-              </>
+              </div>
             ) : (
-              <>There are no workouts, please add a workout</>
+              // <>There are no workouts, please add a workout</>
+              <EmptyCard imgSrc={"react.svg"} message={"No workouts yet. Please add a workout"}/>
             )}
           </div>
         </div>
