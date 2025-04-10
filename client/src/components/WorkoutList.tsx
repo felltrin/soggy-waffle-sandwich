@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Workout from "./Workout";
 import EmptyCard from "./EmptyCard";
+import addWorkoutImg from "../assets/images/addition-notepad-icon.png";
 
 function WorkoutList({ username, workouts, setWorkouts, setWorkoutUpdateId }) {
   const navigate = useNavigate();
@@ -95,7 +96,10 @@ function WorkoutList({ username, workouts, setWorkouts, setWorkoutUpdateId }) {
               </div>
             ) : (
               // <>There are no workouts, please add a workout</>
-              <EmptyCard imgSrc={"react.svg"} message={"No workouts yet. Please add a workout"}/>
+              <EmptyCard
+                imgSrc={addWorkoutImg}
+                message={"No workouts yet. Please add a workout"}
+              />
             )}
           </div>
         </div>
