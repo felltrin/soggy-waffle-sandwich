@@ -10,6 +10,7 @@ const Workout = ({ workout, index, setWorkoutUpdateId, onDelete }) => {
       >
         <div className="mr-50">
           <span>{workout.created.substring(0, 16)} </span>
+          <br></br>
           <span>{workout.distance}km </span>
           <span>{workout.duration} minute(s)</span>
         </div>
