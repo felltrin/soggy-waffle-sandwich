@@ -95,7 +95,6 @@ function WorkoutList({ username, workouts, setWorkouts, setWorkoutUpdateId }) {
                 ))}
               </div>
             ) : (
-              // <>There are no workouts, please add a workout</>
               <EmptyCard
                 imgSrc={addWorkoutImg}
                 message={"No workouts yet. Please add a workout"}
