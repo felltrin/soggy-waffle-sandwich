@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Workout from "./Workout";
 import EmptyCard from "./EmptyCard";
-import addWorkoutImg from "../assets/images/addition-notepad-icon.png";
+import addWorkoutImg from "../assets/images/new-element-addition.png";
 
 function WorkoutList({ username, workouts, setWorkouts, setWorkoutUpdateId }) {
   const navigate = useNavigate();
