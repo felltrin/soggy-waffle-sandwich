@@ -30,10 +30,6 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    @app.route("/api/users", methods=["GET"])
-    def users():
-        return jsonify({"users": ["lucius", "gabe", "jai"]})
-
     from . import db
     db.init_app(app)
 

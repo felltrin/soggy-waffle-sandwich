@@ -4,10 +4,64 @@ import axios from "axios";
 import Workout from "./Workout";
 import EmptyCard from "./EmptyCard";
 import addWorkoutImg from "../assets/images/new-element-addition.png";
+import {
+  Chart as ChartJS,
+  Tooltip,
+  Legend,
+  Title,
+  LineElement,
+  PointElement,
+  LinearScale,
+  CategoryScale,
+} from "chart.js";
+import { Line } from "react-chartjs-2";
+import faker from "faker";
+
+export const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "top" as const,
+    },
+    title: {
+      display: true,
+      text: "Chart.js Line Chart",
+    },
+  },
+};
+
+const labels = ["January", "February", "March", "April", "May", "June", "July"];
+
+export const data = {
+  labels,
+  datasets: [
+    {
+      label: "Dataset 1",
+      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
+      borderColor: "rgb(255, 99, 132)",
+      backgroundColor: "rgba(255, 99, 132, 0.5)",
+    },
+    {
+      label: "Dataset 2",
+      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
+      borderColor: "rgb(53, 162, 235)",
+      backgroundColor: "rgba(53, 162, 235, 0.5)",
+    },
+  ],
+};
 
 function WorkoutList({ username, workouts, setWorkouts, setWorkoutUpdateId }) {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
+  );
 
   const signOutButton = async () => {
     try {
@@ -81,19 +135,23 @@ function WorkoutList({ username, workouts, setWorkouts, setWorkoutUpdateId }) {
             </button>
           </div>
 
-          {/* <div className="container bg-gray-100 p-6 rounded-xl"> */}
           <div className="container mt-auto">
             {workouts.length > 0 ? (
-              <div className="bg-gray-100 p-6 rounded-xl">
-                {workouts.map((workout, index) => (
-                  <Workout
-                    workout={workout}
-                    index={index}
-                    setWorkoutUpdateId={setWorkoutUpdateId}
-                    onDelete={onDelete}
-                  />
-                ))}
-              </div>
+              <>
+                <div className="bg-gray-100 p-6 rounded-xl">
+                  {workouts.map((workout, index) => (
+                    <Workout
+                      workout={workout}
+                      index={index}
+                      setWorkoutUpdateId={setWorkoutUpdateId}
+                      onDelete={onDelete}
+                    />
+                  ))}
+                </div>
+                <div className="bg-gray-100 p-4 mt-3 rounded-2xl">
+                  <Line options={options} data={data} />
+                </div>
+              </>
             ) : (
               <EmptyCard
                 imgSrc={addWorkoutImg}
