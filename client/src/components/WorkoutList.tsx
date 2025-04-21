@@ -1,4 +1,4 @@
-import { Plus } from "lucide-react";
+import { Plus, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Workout from "./Workout";
@@ -13,6 +13,7 @@ import {
   PointElement,
   LinearScale,
   CategoryScale,
+  scales,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import faker from "faker";
@@ -25,27 +26,36 @@ export const options = {
     },
     title: {
       display: true,
-      text: "Chart.js Line Chart",
+      text: "User's Average Run Times",
+    },
+  },
+  scales: {
+    x: {
+      title: {
+        display: true,
+        text: "Month",
+      },
+    },
+    y: {
+      title: {
+        display: true,
+        text: "Time (in mins)",
+      },
     },
   },
 };
 
+// the y-axis labels should change
 const labels = ["January", "February", "March", "April", "May", "June", "July"];
 
 export const data = {
   labels,
   datasets: [
     {
-      label: "Dataset 1",
-      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
+      label: "User Time's",
+      data: labels.map(() => faker.datatype.number({ min: 0, max: 100 })),
       borderColor: "rgb(255, 99, 132)",
       backgroundColor: "rgba(255, 99, 132, 0.5)",
-    },
-    {
-      label: "Dataset 2",
-      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-      borderColor: "rgb(53, 162, 235)",
-      backgroundColor: "rgba(53, 162, 235, 0.5)",
     },
   ],
 };
@@ -162,7 +172,10 @@ function WorkoutList({ username, workouts, setWorkouts, setWorkoutUpdateId }) {
         </div>
         <div className="p-4 mt-18">
           {workouts.length > 0 ? (
-            <div className="bg-gray-100 mt-3 rounded-2xl">
+            <div className="bg-gray-100 mt-3 rounded-2xl p-4">
+              <button className="bg-white rounded-md p-1">
+                <X className="justify-end" />
+              </button>
               <Line options={options} data={data} />
             </div>
           ) : (
