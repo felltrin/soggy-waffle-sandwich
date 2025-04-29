@@ -19,9 +19,9 @@ import { Line } from "react-chartjs-2";
 import faker from "faker";
 
 // the y-axis labels should change
-const labels = ["January", "February", "March", "April", "May", "June", "July"];
+// const labels = ["January", "February", "March", "April", "May", "June", "July"];
 
-function WorkoutList({ username, workouts, setWorkouts, setWorkoutUpdateId }) {
+function WorkoutList({ username, workouts, month_label, setWorkouts, setWorkoutUpdateId }) {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   ChartJS.register(
@@ -33,6 +33,8 @@ function WorkoutList({ username, workouts, setWorkouts, setWorkoutUpdateId }) {
     Tooltip,
     Legend
   );
+
+  const labels = month_label;
 
   const data = {
     labels,

@@ -8,6 +8,7 @@ import WorkoutList from "@/components/WorkoutList";
 const Dashboard = () => {
   const [username, setUsername] = useState("");
   const [workouts, setWorkouts] = useState([]);
+  const [monthLabels, setMonthLabels] = useState([]);
   const [workoutToUpdateId, setWorkoutUpdateId] = useState(0);
   const token = localStorage.getItem("token");
 
@@ -36,7 +37,8 @@ const Dashboard = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      setWorkouts(response.data.workouts);
+      setWorkouts(response.data.workouts.data);
+      setMonthLabels(response.data.workouts.month_label);
     } catch (error) {
       console.error(
         "Failed to retrieve workouts:",
@@ -61,6 +63,7 @@ const Dashboard = () => {
             <WorkoutList
               username={username}
               workouts={workouts}
+              month_label={monthLabels}
               setWorkouts={setWorkouts}
               setWorkoutUpdateId={setWorkoutUpdateId}
             />

@@ -34,6 +34,7 @@ const Workout = ({ workout, index, setWorkoutUpdateId, onDelete }) => {
             </div>
           </button>
         </div>
+        {/* <br></br> */}
       </div>
     </>
   );
