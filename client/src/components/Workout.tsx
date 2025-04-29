@@ -8,7 +8,7 @@ const Workout = ({ workout, index, setWorkoutUpdateId, onDelete }) => {
         key={index}
         className="flex justify-between items-center bg-white py-3 px-4 rounded-md mb-4"
       >
-        <div className="mr-50">
+        <div className="mr-5">
           <span>{workout.created.substring(0, 16)} </span>
           <br></br>
           <span>{workout.distance}km </span>
@@ -34,7 +34,7 @@ const Workout = ({ workout, index, setWorkoutUpdateId, onDelete }) => {
             </div>
           </button>
         </div>
-        <br></br>
+        {/* <br></br> */}
       </div>
     </>
   );
