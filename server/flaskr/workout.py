@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, request, url_for, jsonify
+from flask import Blueprint, request, jsonify
 from werkzeug.exceptions import abort
 
 from flask_jwt_extended import jwt_required, current_user
@@ -8,14 +8,16 @@ bp = Blueprint("workout", __name__)
 
 
 def get_workouts(db):
+    user_months_set = set()
+    workout_arr = []
+    
     workouts = db.execute(
         "SELECT w.id, created, distance, duration, user_id"
         " FROM workout w WHERE w.user_id = ?"
         "  ORDER BY created DESC",
         (current_user["id"],),
     ).fetchall()
-
-    workout_arr = []
+    
     for workout in workouts:
         workout_obj = {
             "id": workout["id"],
@@ -23,17 +25,29 @@ def get_workouts(db):
             "duration": workout["duration"],
             "distance": workout["distance"],
         }
+        user_months_set.add(workout["created"].strftime("%B"))
         workout_arr.append(workout_obj)
 
-    return workout_arr
+    return_list = list(user_months_set)
+    workout_data = {"data": workout_arr, "month_label": return_list}
+    
+    return workout_data
 
 
 @bp.route("/")
 @jwt_required()
 def index():
     db = get_db()
-    workout_arr = get_workouts(db)
-    return jsonify({"message": "Workouts Retrieved", "workouts": workout_arr})
+    workout_data = get_workouts(db)
+    
+    # user_month_set = set()
+    # extract the months into a set (prohibits duplicates)
+    # for workout in workout_arr:
+    #     user_month_set.add(workout["created"].strftime("%B"))
+    # return jsonify({"message": "Workouts Retrieved", "workouts": workout_arr, "xLabels": list(user_month_set)})
+    # print(workout_data["data"])
+    
+    return jsonify({"message": "Workouts Retrieved", "workouts": workout_data})
 
 
 @bp.route("/create", methods=["GET", "POST"])
