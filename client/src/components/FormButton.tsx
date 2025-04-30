@@ -1,4 +1,4 @@
-const FormButton = ({ buttonText }) => {
+const FormButton = ({ buttonText }: { buttonText: string}) => {
   return (
     <>
       <button
