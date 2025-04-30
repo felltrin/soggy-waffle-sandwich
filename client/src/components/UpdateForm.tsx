@@ -28,7 +28,7 @@ function UpdateForm({ token, workoutId, setWorkouts }) {
           workout,
         },
       });
-      setWorkouts(response.data.workouts);
+      setWorkouts(response.data.workouts.data);
     } catch (error) {
       console.error(
         "Failed to update workout:",

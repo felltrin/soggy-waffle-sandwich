@@ -28,7 +28,7 @@ function WorkoutForm({ token, setWorkouts }) {
         }
       );
       console.log("Data recieved:", response.data);
-      setWorkouts(response.data.workouts);
+      setWorkouts(response.data.workouts.data);
     } catch (error) {
       console.error(
         "Failed to fetch protected data:",
