@@ -18,8 +18,6 @@ import {
 import { Line } from "react-chartjs-2";
 import faker from "faker";
 
-// the y-axis labels should change
-// const labels = ["January", "February", "March", "April", "May", "June", "July"];
 
 function WorkoutList({ username, workouts, month_label, setWorkouts, setWorkoutUpdateId }) {
   const navigate = useNavigate();
@@ -108,7 +106,7 @@ function WorkoutList({ username, workouts, month_label, setWorkouts, setWorkoutU
         url: url,
         headers: headers,
       });
-      setWorkouts(response.data.workouts);
+      setWorkouts(response.data.workouts.data);
     } catch (error) {
       console.error(
         "Failed to delete workout log:",

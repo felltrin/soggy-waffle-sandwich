@@ -40,13 +40,6 @@ def index():
     db = get_db()
     workout_data = get_workouts(db)
     
-    # user_month_set = set()
-    # extract the months into a set (prohibits duplicates)
-    # for workout in workout_arr:
-    #     user_month_set.add(workout["created"].strftime("%B"))
-    # return jsonify({"message": "Workouts Retrieved", "workouts": workout_arr, "xLabels": list(user_month_set)})
-    # print(workout_data["data"])
-    
     return jsonify({"message": "Workouts Retrieved", "workouts": workout_data})
 
 
