@@ -9,6 +9,7 @@ const Dashboard = () => {
   const [username, setUsername] = useState("");
   const [workouts, setWorkouts] = useState([]);
   const [monthLabels, setMonthLabels] = useState([]);
+  const [times, setTimes] = useState({});
   const [workoutToUpdateId, setWorkoutUpdateId] = useState(0);
   const token = localStorage.getItem("token");
 
@@ -39,6 +40,7 @@ const Dashboard = () => {
       });
       setWorkouts(response.data.workouts.data);
       setMonthLabels(response.data.workouts.month_label);
+      setTimes(response.data.workouts.times);
     } catch (error) {
       console.error(
         "Failed to retrieve workouts:",
@@ -66,6 +68,7 @@ const Dashboard = () => {
               month_label={monthLabels}
               setWorkouts={setWorkouts}
               setWorkoutUpdateId={setWorkoutUpdateId}
+              times={times}
             />
           }
         />
