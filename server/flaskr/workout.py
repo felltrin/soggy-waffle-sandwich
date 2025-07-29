@@ -32,10 +32,31 @@ def get_workouts(db):
 
     # used during month sorting
     month_lookup = list(month_name)
-
     month_list = sorted(user_months_set, key=month_lookup.index)
-    workout_data = {"data": workout_arr, "month_label": month_list}
+
+    """
+    This is a multi line comment 
+    Yippie
+    This section of code is for calculating the average time of a user's
+    logged workouts
+    For this, I will use a dictionary to keep track of the month (key)
+    And the times for the value
+    """
+    # Empty dictionary with keys
+    user_month_data = dict.fromkeys(month_list, 0)
+    month_count = dict.fromkeys(month_list, 0)
+
+    # calculating time
+    for i in range(len(workout_arr)):
+        cur_workout = workout_arr[i]
+        cur_month = cur_workout["created"].strftime("%B")
+        month_count[cur_month] += 1
+        user_month_data[cur_month] += cur_workout["duration"]
+
+    for key in user_month_data.keys():
+        user_month_data[key] /= month_count[key]
     
+    workout_data = {"data": workout_arr, "month_label": month_list, "times": user_month_data}
     return workout_data
 
 

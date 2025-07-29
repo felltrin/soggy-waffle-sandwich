@@ -13,13 +13,17 @@ import {
   PointElement,
   LinearScale,
   CategoryScale,
-  scales,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import faker from "faker";
 
-
-function WorkoutList({ username, workouts, month_label, setWorkouts, setWorkoutUpdateId }) {
+function WorkoutList({
+  username,
+  workouts,
+  month_label,
+  setWorkouts,
+  setWorkoutUpdateId,
+  times,
+}) {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   ChartJS.register(
@@ -32,14 +36,22 @@ function WorkoutList({ username, workouts, month_label, setWorkouts, setWorkoutU
     Legend
   );
 
-  const labels = month_label;
+  const new_obj = {};
+  for (let i = 0; i < month_label.length; i++) {
+    if (!new_obj[month_label[i]]) {
+      new_obj[month_label[i]] = times[month_label[i]];
+    }
+  }
+
+  const labels = Object.keys(new_obj);
+  const theData = Object.values(new_obj);
 
   const data = {
     labels,
     datasets: [
       {
         label: `${username}'s Times`,
-        data: labels.map(() => faker.datatype.number({ min: 0, max: 100 })),
+        data: theData,
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
