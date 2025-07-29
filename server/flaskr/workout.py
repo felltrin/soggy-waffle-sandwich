@@ -4,6 +4,8 @@ from werkzeug.exceptions import abort
 from flask_jwt_extended import jwt_required, current_user
 from flaskr.db import get_db
 
+from calendar import month_name
+
 bp = Blueprint("workout", __name__)
 
 
@@ -28,8 +30,11 @@ def get_workouts(db):
         user_months_set.add(workout["created"].strftime("%B"))
         workout_arr.append(workout_obj)
 
-    return_list = list(user_months_set)
-    workout_data = {"data": workout_arr, "month_label": return_list}
+    # used during month sorting
+    month_lookup = list(month_name)
+
+    month_list = sorted(user_months_set, key=month_lookup.index)
+    workout_data = {"data": workout_arr, "month_label": month_list}
     
     return workout_data
 
