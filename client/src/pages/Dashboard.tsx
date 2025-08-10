@@ -8,10 +8,27 @@ import WorkoutList from "@/components/WorkoutList";
 const Dashboard = () => {
   const [username, setUsername] = useState("");
   const [workouts, setWorkouts] = useState([]);
-  const [monthLabels, setMonthLabels] = useState([]);
   const [times, setTimes] = useState({});
+  const [monthLabels, setMonthLabels] = useState([]);
   const [workoutToUpdateId, setWorkoutUpdateId] = useState(0);
   const token = localStorage.getItem("token");
+
+  const fetchChartData = async () => {
+    try {
+      const response = await axios.get("http://127.0.0.1:8080/", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setMonthLabels(response.data.workouts.month_label);
+      setTimes(response.data.workouts.times);
+    } catch (error) {
+      console.error(
+        "Failed to retrieve chart data:",
+        error.response.data.msg || error.message
+      );
+    }
+  };
 
   const fetchUsername = async () => {
     try {
@@ -39,8 +56,6 @@ const Dashboard = () => {
         },
       });
       setWorkouts(response.data.workouts.data);
-      setMonthLabels(response.data.workouts.month_label);
-      setTimes(response.data.workouts.times);
     } catch (error) {
       console.error(
         "Failed to retrieve workouts:",
@@ -54,6 +69,7 @@ const Dashboard = () => {
   useEffect(() => {
     fetchUsername();
     fetchUserWorkouts();
+    fetchChartData();
   }, []);
 
   return (
@@ -65,7 +81,7 @@ const Dashboard = () => {
             <WorkoutList
               username={username}
               workouts={workouts}
-              month_label={monthLabels}
+              monthLabels={monthLabels}
               setWorkouts={setWorkouts}
               setWorkoutUpdateId={setWorkoutUpdateId}
               times={times}
@@ -74,7 +90,14 @@ const Dashboard = () => {
         />
         <Route
           path="/workout-log"
-          element={<WorkoutForm token={token} setWorkouts={setWorkouts} />}
+          element={
+            <WorkoutForm
+              token={token}
+              setWorkouts={setWorkouts}
+              setTimes={setTimes}
+              setMonthLabels={setMonthLabels}
+            />
+          }
         />
         <Route
           path="/update-log"

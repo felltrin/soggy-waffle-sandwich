@@ -5,7 +5,7 @@ import FormInput from "./FormInput";
 import { ArrowLeft } from "lucide-react";
 import FormButton from "./FormButton";
 
-function WorkoutForm({ token, setWorkouts }) {
+function WorkoutForm({ token, setWorkouts, setTimes, setMonthLabels }) {
   const [formData, setFormData] = useState({
     distance: "",
     duration: "",
@@ -29,6 +29,8 @@ function WorkoutForm({ token, setWorkouts }) {
       );
       console.log("Data recieved:", response.data);
       setWorkouts(response.data.workouts.data);
+      setMonthLabels(response.data.workouts.month_label);
+      setTimes(response.data.workouts.times);
     } catch (error) {
       console.error(
         "Failed to fetch protected data:",

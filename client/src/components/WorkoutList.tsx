@@ -15,11 +15,12 @@ import {
   CategoryScale,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import { useEffect, useState } from "react";
 
 function WorkoutList({
   username,
   workouts,
-  month_label,
+  monthLabels,
   setWorkouts,
   setWorkoutUpdateId,
   times,
@@ -37,9 +38,9 @@ function WorkoutList({
   );
 
   const new_obj = {};
-  for (let i = 0; i < month_label.length; i++) {
-    if (!new_obj[month_label[i]]) {
-      new_obj[month_label[i]] = times[month_label[i]];
+  for (let i = 0; i < monthLabels.length; i++) {
+    if (!new_obj[monthLabels[i]]) {
+      new_obj[monthLabels[i]] = times[monthLabels[i]];
     }
   }
 
