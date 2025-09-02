@@ -10,19 +10,13 @@ import { Link, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <>
-      <Theme appearance="light">
-        <NavBar />
-        <Hero />
-        <FeatureSection />
-        <AboutUs />
-        <Footer />
-      </Theme>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
-    </>
+    <Theme appearance="light">
+      <NavBar />
+      <Hero />
+      <FeatureSection />
+      <AboutUs />
+      <Footer />
+    </Theme>
   );
 }
 
