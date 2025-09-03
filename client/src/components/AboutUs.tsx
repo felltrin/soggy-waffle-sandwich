@@ -1,6 +1,19 @@
 import { Button, Container, Flex, Stack, Text } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 const AboutUs = () => {
+  const navigate = useNavigate();
+
+  const goToLogin = () => {
+    navigate("/login");
+    window.location.reload();
+  };
+
+  const goToRegister = () => {
+    navigate("/register");
+    window.location.reload();
+  };
+
   return (
     <Container maxW={"full"} bg={"#b6f27272"}>
       <Stack minH={"50vh"} gap={14} pt={4}>
@@ -21,6 +34,7 @@ const AboutUs = () => {
               bg={"#ED4F01"}
               textStyle={"xl"}
               _hover={{ bg: "#000" }}
+              onClick={goToRegister}
             >
               Get started
             </Button>
@@ -29,6 +43,7 @@ const AboutUs = () => {
               variant={"outline"}
               border={"2px solid"}
               borderColor={"black"}
+              onClick={goToLogin}
             >
               Login
             </Button>
