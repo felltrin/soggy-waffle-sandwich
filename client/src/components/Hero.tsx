@@ -1,9 +1,21 @@
 import { Button, Container, Flex, Stack, Text } from "@chakra-ui/react";
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";
-import { Link, Routes, Route } from "react-router-dom";
+import { Link, Routes, Route, useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
+
+  const goToLogin = () => {
+    navigate("/login");
+    window.location.reload();
+  };
+
+  const goToRegister = () => {
+    navigate("/register");
+    window.location.reload();
+  };
+
   return (
     <>
       <Container maxW={"full"} p={8} bg={"#b6f27272"}>
@@ -18,10 +30,12 @@ const Hero = () => {
               bg={"#ED4F01"}
               textStyle={"xl"}
               _hover={{ bg: "#000" }}
+              onClick={goToRegister}
             >
               Get started
             </Button>
-            <Link to={"/login"}>
+
+            <Link to={"/login"} onClick={goToLogin}>
               <Button
                 size={"xl"}
                 variant={"outline"}

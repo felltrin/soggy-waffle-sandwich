@@ -15,7 +15,6 @@ import {
   CategoryScale,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import { useEffect, useState } from "react";
 
 function WorkoutList({
   username,
@@ -186,9 +185,9 @@ function WorkoutList({
         <div className="p-4 mt-18">
           {workouts.length > 0 ? (
             <div className="bg-gray-100 mt-3 rounded-2xl p-4">
-              <button className="bg-white rounded-md p-1">
+              {/* <button className="bg-white rounded-md p-1">
                 <X className="justify-end" />
-              </button>
+              </button> */}
               <Line options={options} data={data} />
             </div>
           ) : (
