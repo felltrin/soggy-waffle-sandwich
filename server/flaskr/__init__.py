@@ -1,7 +1,7 @@
 import os
 
 from datetime import timedelta
-from flask import Flask, jsonify
+from flask import Flask, jsonify, send_from_directory
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 
@@ -32,6 +32,19 @@ def create_app(test_config=None):
 
     from . import db
     db.init_app(app)
+
+    # this might not be the right folder
+    frontend_folder = os.path.join(os.getcwd(), "..", "client")
+    dist_folder = os.path.join(frontend_folder, "dist")
+
+    # serve static files from dist folder under the frontend directory
+    @app.route("/", defaults={"filename":""})
+    @app.route("/<path:filename>")
+    def index(filename):
+        if not filename:
+            filename = "index.html"
+
+        return send_from_directory(dist_folder, filename)
 
     from . import auth
     app.register_blueprint(auth.bp)
