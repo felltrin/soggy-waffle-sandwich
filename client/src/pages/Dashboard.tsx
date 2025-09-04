@@ -15,7 +15,7 @@ const Dashboard = () => {
 
   const fetchChartData = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:8080/", {
+      const response = await axios.get("http://127.0.0.1:8080/api/workouts", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -50,7 +50,7 @@ const Dashboard = () => {
 
   const fetchUserWorkouts = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:8080/", {
+      const response = await axios.get("http://127.0.0.1:8080/api/workouts", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
