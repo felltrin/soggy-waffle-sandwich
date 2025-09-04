@@ -60,7 +60,7 @@ def get_workouts(db):
     return workout_data
 
 
-@bp.route("/")
+@bp.route("/api/workouts")
 @jwt_required()
 def index():
     db = get_db()
