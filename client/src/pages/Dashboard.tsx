@@ -76,7 +76,7 @@ const Dashboard = () => {
     <>
       <Routes>
         <Route
-          path="/"
+          path="*"
           element={
             <WorkoutList
               username={username}
