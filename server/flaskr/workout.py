@@ -69,7 +69,7 @@ def index():
     return jsonify({"message": "Workouts Retrieved", "workouts": workout_data})
 
 
-@bp.route("/create", methods=["GET", "POST"])
+@bp.route("/api/create", methods=["GET", "POST"])
 @jwt_required()
 def create():
     if request.method == "POST":
@@ -111,7 +111,7 @@ def get_workout(id, check_author=True):
     return workout
 
 
-@bp.route("/<int:id>/update", methods=['GET', "POST"])
+@bp.route("/api/<int:id>/update", methods=['GET', "POST"])
 @jwt_required()
 def update(id):
     if request.method == "GET":
@@ -140,7 +140,7 @@ def update(id):
             return jsonify({"message": "Workout has been successfully updated", "workouts": workout_arr}), 200
 
 
-@bp.route("/<int:id>/delete", methods=["POST"])
+@bp.route("/api/<int:id>/delete", methods=["POST"])
 @jwt_required()
 def delete(id):
     get_workout(id)
