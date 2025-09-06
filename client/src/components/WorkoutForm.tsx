@@ -17,7 +17,7 @@ function WorkoutForm({ token, setWorkouts, setTimes, setMonthLabels }) {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8080/create",
+        "http://127.0.0.1:8080/api/create",
         {
           formData,
         },

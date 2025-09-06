@@ -14,7 +14,7 @@ function UpdateForm({ token, workoutId, setWorkouts }) {
 
   const handleUpdateSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const url = `http://127.0.0.1:8080/${workoutId}/update`;
+    const url = `http://127.0.0.1:8080/api/${workoutId}/update`;
     const headers = {
       Authorization: `Bearer ${token}`,
     };
@@ -46,7 +46,7 @@ function UpdateForm({ token, workoutId, setWorkouts }) {
   };
 
   const fetchWorkoutToUpdate = async () => {
-    const url = `http://127.0.0.1:8080/${workoutId}/update`;
+    const url = `http://127.0.0.1:8080/api/${workoutId}/update`;
     const headers = {
       Authorization: `Bearer ${token}`,
     };

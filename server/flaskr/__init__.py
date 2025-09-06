@@ -45,6 +45,10 @@ def create_app(test_config=None):
             filename = "index.html"
 
         return send_from_directory(dist_folder, filename)
+    
+    @app.errorhandler(404)
+    def not_found(e):
+        return send_from_directory(dist_folder, "index.html")
 
     from . import auth
     app.register_blueprint(auth.bp)
