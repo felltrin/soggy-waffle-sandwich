@@ -4,6 +4,7 @@ import WorkoutForm from "@/components/WorkoutForm";
 import { Route, Routes } from "react-router-dom";
 import UpdateForm from "@/components/UpdateForm";
 import WorkoutList from "@/components/WorkoutList";
+import { BASE_URL } from "@/App";
 
 const Dashboard = () => {
   const [username, setUsername] = useState("");
@@ -15,7 +16,7 @@ const Dashboard = () => {
 
   const fetchChartData = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:8080/api/workouts", {
+      const response = await axios.get(BASE_URL + "/api/workouts", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -32,7 +33,7 @@ const Dashboard = () => {
 
   const fetchUsername = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:8080/auth/get_name", {
+      const response = await axios.get(BASE_URL + "/auth/get_name", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -50,7 +51,7 @@ const Dashboard = () => {
 
   const fetchUserWorkouts = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:8080/api/workouts", {
+      const response = await axios.get(BASE_URL + "/api/workouts", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
