@@ -15,6 +15,7 @@ import {
   CategoryScale,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import { BASE_URL } from "@/App";
 
 function WorkoutList({
   username,
@@ -87,7 +88,7 @@ function WorkoutList({
 
   const signOutButton = async () => {
     try {
-      const response = await axios.delete("http://127.0.0.1:8080/auth/logout", {
+      const response = await axios.delete(BASE_URL + "/auth/logout", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -108,7 +109,7 @@ function WorkoutList({
   };
 
   const onDelete = async (workoutId: number) => {
-    const url = `http://127.0.0.1:8080/api/${workoutId}/delete`;
+    const url = BASE_URL + `/api/${workoutId}/delete`;
     const headers = {
       Authorization: `Bearer ${token}`,
     };
