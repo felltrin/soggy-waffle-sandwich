@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import FormInput from "@/components/FormInput";
 import FormButton from "@/components/FormButton";
+import { BASE_URL } from "@/App";
 
 function Login() {
   const [userData, setUserData] = useState({
@@ -15,7 +16,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://127.0.0.1:8080/auth/login", {
+      const response = await axios.post(BASE_URL + "/auth/login", {
         userData,
       });
 

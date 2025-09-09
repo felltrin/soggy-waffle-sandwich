@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import FormInput from "./FormInput";
 import { ArrowLeft } from "lucide-react";
 import FormButton from "./FormButton";
+import { BASE_URL } from "@/App";
 
 function WorkoutForm({ token, setWorkouts, setTimes, setMonthLabels }) {
   const [formData, setFormData] = useState({
@@ -17,7 +18,7 @@ function WorkoutForm({ token, setWorkouts, setTimes, setMonthLabels }) {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8080/api/create",
+        BASE_URL + "/api/create",
         {
           formData,
         },
