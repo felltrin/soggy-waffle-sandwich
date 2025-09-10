@@ -14,7 +14,7 @@ This is a web application for tracking run times and distances
 - [x] Test the app
   - [x] Backend (w/ pytest)
   - [x] Frontend (w/ Jest)
-- [ ] Deploy
+- [x] Deploy
 
 ## Resources
 
