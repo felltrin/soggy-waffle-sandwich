@@ -21,12 +21,12 @@ I've been looking for a product to suit my specific needs and I found that the s
 1. Clone this repository
 2. `cd` into the server directory
 3. Source the environment
-  i. `source .venv/bin/activate` on MacOS, Linux
-  ii. `.venv\Scripts\activate` on Windows
+   1. `source .venv/bin/activate` on MacOS, Linux
+   2. `.venv\Scripts\activate` on Windows
 4. Run `pip install -r requirements.txt`
-  i. If that doesn't work, try `pip3 install -r requirements.txt`
+   1. If that doesn't work, try `pip3 install -r requirements.txt`
 5. Lastly, run `python main.py`
-  i. `python3 main.py` if above doesn't work 
+   1. `python3 main.py` if above doesn't work 
 7. `cd` back up a directory
 8. `cd` into the client
 9. Run `npm install`
