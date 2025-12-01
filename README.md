@@ -35,7 +35,7 @@ I've been looking for a product to suit my specific needs and I found that the s
 ## 🎞️ Preview
 
 <video width="320" height="240" controls>
-  <source src="client/public/Screen Recording 2025-12-01 at 12.53.54 PM.mov" type="video/mp4">
+  <source src="preview.mp4" type="video/mp4">
 </video>
 
 ## 📚 Resources
