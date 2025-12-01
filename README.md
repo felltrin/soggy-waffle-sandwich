@@ -34,7 +34,7 @@ I've been looking for a product to suit my specific needs and I found that the s
 
 ## 🎞️ Preview
 
-[![Preview](https://img.youtube.com/vi/cYWqL3-STeo/0.jpg)](https://www.youtube.com/watch?v=cYWqL3-STeo)
+https://github.com/user-attachments/assets/3cd7bf36-e398-4d12-859f-26bb1f810af1
 
 ## 📚 Resources
 
