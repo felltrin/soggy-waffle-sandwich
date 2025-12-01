@@ -32,6 +32,12 @@ I've been looking for a product to suit my specific needs and I found that the s
 9. Run `npm install`
 10. Lastly, run `npm run dev` for the client side
 
+## 🎞️ Preview
+
+<video width="320" height="240" controls>
+  <source src="video.mov" type="video/mp4">
+</video>
+
 ## 📚 Resources
 
 - https://www.figma.com/community/file/1212785201447006833
