@@ -34,9 +34,7 @@ I've been looking for a product to suit my specific needs and I found that the s
 
 ## 🎞️ Preview
 
-<video width="320" height="240" controls>
-  <source src="preview.mp4" type="video/mp4">
-</video>
+[![Preview](https://img.youtube.com/vi/cYWqL3-STeo/0.jpg)](https://www.youtube.com/watch?v=cYWqL3-STeo)
 
 ## 📚 Resources
 
