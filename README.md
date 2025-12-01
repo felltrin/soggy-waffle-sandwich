@@ -1,4 +1,4 @@
-# Workout Tracker Application
+💪 # Workout Tracker Application
 
 This is a web application for tracking run times and distances
 
